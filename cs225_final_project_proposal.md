@@ -43,17 +43,17 @@ real-world data that will contain errors).
 ## Timeline
 
 ### Week 1 (Nov 8th - Nov 12th):
-[NEED STUFF HERE]
+We will get familiar with the Spotify API and get a working database through the SpotiPy/SpotifyR packages/libraries. We will make sure to clean up the database and create working demos for the final product.
 ***
 ### Week 2 (Nov 15th - Nov 19th):
-[NEED STUFF HERE]
+We will experiment with the data and implement our dataset within C++. We will test to make sure the input and output works with a very basic test case, and we will start implementing our graph traversal along with possible our graph data algotirhms
 *** 
 ### Week 3 (THANKSGIVING BREAK):
-[NEED STUFF HERE]
+Relax.
 *** 
 ### Week 4 (Nov 29th - Dec 3rd) [Mid-Project Check-in from Nov 29th - Dec 1st]:
-[NEED STUFF HERE]
+We will continue working on our graph data algorithms and ensuring that the comparisons between the 2+ datasets are working as expected. During this time we will also focus on creating test cases and ensuring that our analysis is not breaking the functionality or manipulating our current database.
 *** 
 ### Week 5 (Dec 6th - Dec 10th, Dec 13th) [FINAL WEEK]:
-[NEED STUFF HERE]
+Final clean up with our algorithms and also finalizing our test cases.
 
