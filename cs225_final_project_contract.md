@@ -25,4 +25,4 @@
 + Daniel Rugutt
 + Zuhair Ali
 + Priya Kumar
-+
++ Lexi Ippolito
