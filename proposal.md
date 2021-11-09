@@ -4,14 +4,10 @@
 
 ## Leading Question
 
-The goal of the project is to help individuals understand 
-the similarities in music interests 
-between two users/datasets. We want to do this by calculating 
-different metrics based on their listening history and musical 
-interests. We want to calculate not only how two 
-users' music tastes are similar, but also make them able to recommend 
-different songs, artists, and albums based on these 
-similarities.
+The goal of the project is to curate a new playlist for a Spotify 
+user based on their current favorite artists and the genres they are known for. 
+We are interested in helping the user find new songs in 
+a music taste that is still familiar to them.
 
 ## Dataset Acquisition and Processing
 
@@ -27,8 +23,7 @@ be able to map the variety of songs between two different databases
 (users/people), and we will be able to do analysis on them such as including 
 an edge between two songs, artists, or an album based on if there is a 
 recommendation from one to the other (through parameters like the energy, 
-valence, emotion, and more of a song, album, or artist). Because we will 
-be using algorithms that don’t care about weights, we will not need them. 
+valence, emotion, and more of a song, album, or artist).
 Also, because we are getting data from the Spotify API services, it is very 
 unlikely that there will be missing information from every track as all the 
 information is verified directly from Spotify (we should not run into any 
@@ -36,7 +31,7 @@ real-world data that will contain errors).
 
 ## Graph Algorithms
 
-[NEED STUFF HERE]
+Our main data structure will be an Adjacency List implementation. The algorithm we will be using that was covered in class will be Dijkstra’s algorithm. This will be used to find the closest connections between artists in the user’s playlist and Spotify’s curated genre playlists. The algorithm we will be using that was not covered in class will be the PageRank algorithm. This will be used to give the user’s most favorite artists higher rank and their less favorite artists lower rank. We will be using a depth-first traversal to traverse the data in the graph. We will be looking at one Spotify user’s list of most favorite artists. As input, we will be taking in an integer representing the weight (genre) we are looking for in the top favorite artists list. The output will be a set of new songs for the user to listen to.
 
 ## Timeline
 
