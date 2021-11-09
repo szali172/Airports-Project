@@ -5,15 +5,13 @@
 ## Leading Question
 
 The goal of the project is to help individuals understand 
-the relationship and similarities/differences of music interests 
-between two users/datasets. We are interested in being able to 
-let individuals better understand their music taste through 
+the similarities in music interests 
+between two users/datasets. We want to do this by calculating 
 different metrics based on their listening history and musical 
-interests and being able to calculate not only how similar two 
-individuals music tastes are similar, but being able to recommend 
-different songs, artists, albums, and more based on these 
-similarities/differences and being able to recommend songs that 
-they both would enjoy.
+interests. We want to calculate not only how two 
+users' music tastes are similar, but also make them able to recommend 
+different songs, artists, and albums based on these 
+similarities.
 
 ## Dataset Acquisition and Processing
 
