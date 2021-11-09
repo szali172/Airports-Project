@@ -17,13 +17,11 @@ combination of the the SpotiPy Python library
 (https://github.com/charlie86/spotifyr) to extract the information 
 about songs, albums, artists, and more from a proposed user. We will then 
 map a specific track to nodes that will have linking edges to their 
-position/existence in a playlist, album, artist, or genre (for example, 
-a track will link to an artist, which will link to a genre). We will then 
+position/existence in a playlist, album, artist, or genre. We will then 
 be able to map the variety of songs between two different databases 
-(users/people), and we will be able to do analysis on them such as including 
+(our top artists/Spotify's curated genre playlist), and we will be able to do analysis on them such as including 
 an edge between two songs, artists, or an album based on if there is a 
-recommendation from one to the other (through parameters like the energy, 
-valence, emotion, and more of a song, album, or artist).
+recommendation from one to the other (through parameters like the genre/artist of a song).
 Also, because we are getting data from the Spotify API services, it is very 
 unlikely that there will be missing information from every track as all the 
 information is verified directly from Spotify (we should not run into any 
