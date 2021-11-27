@@ -16,9 +16,9 @@ how you will handle potential errors:
 
 ## Graph Algorithms
 
-graph data algorithm 1 (covered):
-inputs you want it to take in:
-output you are expecting for it:
+graph data algorithm 1 (covered): Dijkstra's algorithm
+inputs you want it to take in: Starting airport
+output you are expecting for it: 
 target big O:
 
 graph data algorithm 2 (uncovered):
