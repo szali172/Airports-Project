@@ -50,9 +50,9 @@ We will experiment with the data and implement our dataset within C++. We will t
 Relax.
 ***
 ### Week 4 (Nov 29th - Dec 3rd) [Mid-Project Check-in from Nov 29th - Dec 1st]:
-We will work on our graph data algorithms and ensure that the comparisons between 2+ datasets are working as expected. During this time we will also focus on creating test cases and ensuring that our analysis is not breaking the functionality or manipulating our current database.
+We will process all of our data as described and begin work on our graph data algorithms. During this time we will also focus on creating test cases and ensuring that our analysis is not manipulating our current database.
 ***
 ### Week 5 (Dec 6th - Dec 10th, Dec 13th) [FINAL WEEK]:
-Final clean up with our algorithms and also finalizing our test cases.
+Final clean up with our algorithms and also finalizing/passing our test cases.
 
 
