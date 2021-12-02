@@ -1,14 +1,41 @@
 #pragma once
 
+#include "point.h"
+#include "cs225/PNG.h"
+#include "cs225/HSLAPixel.h"
+
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
+#include <stack>
+
+using namespace cs225;
 
 class Graph {
     public:
-// graph-parse.cpp
+    /**
+    * Each edge represents a directed and weighted connection between two airports
+    * data.first represents the Airport ID of the destination airport
+    * data.second represents the distance (weight) from the source airport to this destination airport
+    * If the Edge is the head of it's linked list, data.first represents latitude, data.second represents longitude
+    */
+    struct Edge {
+        std::pair<double, double> data;
+        Edge* next;
+    };
+
     Graph();
+
+    /**
+    * Adds an edge to a Graph
+    * @param index index of the vertex edge will be linked to
+    * @param edge edge to be added at that index
+    */
+    void addEdge(int index, Edge* edge);
+    
+
+// graph-parse.cpp
     Graph(std::string airports_file, std::string routes_file);
 
 // print-graph.cpp
@@ -33,21 +60,22 @@ class Graph {
 
     /**
     * Performs Dijkstra's algorithm on our directed and weighted graph
-    * @param start index to the starting airport found from locateStart()
+    * Dijkstra's requires two paremeters, a graph and starting node
+    *   use "this" to refer to the graph and "start" for the starting node
     * @return SSSP graph
     */
-    Graph* dijkstra(int start);
+    Graph* dijkstra();
 
     private:
-    /**
-    * Each edge represents a directed and weighted connection between two airports
-    * data.first represents the Airport ID of the destination airport
-    * data.second represents the distance (weight) from the source airport to this destination airport
-    */
-    struct Edge {
-        std::pair<int, int> data;
-        Edge* next;
-    };
     std::vector<Edge*> airports;
     int start; // Starting airport
+
+    /**
+    * Helper function for print()
+    * prints only the edge from Airport A to B
+    * @param map PNG to draw on
+    * @param src source airport
+    * @param dest destination airport
+    */
+    void printEdge(PNG* map, Point<2> src, Point<2> dest);
 };
