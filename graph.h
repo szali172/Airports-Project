@@ -71,6 +71,23 @@ class Graph {
     int start; // Starting airport
 
     /**
+    * Creates an (x, y) point with a given latitude and longitude coordinate
+    * @param map used to scale the (x, y) coordinate within the bounds of the image
+    * @param lat latitude
+    * @param lon longitude
+    * @return 2D point (x, y) that represents the latitude and longitude on the map
+    */
+    Point<2> createPoint(PNG* map, double lat, double lon);
+
+    /**
+    * Helper function for print()
+    * prints a red dot on the map to represent the passed airport
+    * @param map PNG to draw on
+    * @param airport (x, y) coordinate for the airport
+    */
+    void printVertex(PNG* map, Point<2> airport);
+
+    /**
     * Helper function for print()
     * prints only the edge from Airport A to B
     * @param map PNG to draw on
