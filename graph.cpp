@@ -1,5 +1,27 @@
 #include "graph.h"
 
+/*
+/ Searches the airport csv file for the starting airport specified by the user.
+/ Returns the airport ID if the airport is found.
+/ If the airport is not found, prints error message and exits code.
+*/
+int locateStart(std::string airports_file; std::string start) {
+    fstrem fs(airports_file);
+
+    int lineNum = 0;
+    string currLine;
+    while(getLine(fs, currLine)) {
+        lineNum++;
+        if (currLine.find(start, 0) != std::string::npos) {
+            int airportID = currLine.substr(0, currLine.find(','));
+            return airportID;
+        }
+    }
+
+    std::cout << "This staring airport cannot be found.  Please check you input and try again." << std::endl;
+    exit(1);
+}
+
 /* 
 / Dijkstra's algorithm to find the shortest path for a graph using adjacency list
 */
