@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <stack>
+#include <list>
 
 using namespace cs225;
 
@@ -32,7 +33,7 @@ class Graph {
     * @param index index of the vertex edge will be linked to
     * @param edge edge to be added at that index
     */
-    void addEdge(int index, Edge* edge);
+    void addEdge(list<Edge*> adj_list, int index, Edge* edge);
     
 
 // graph-parse.cpp
@@ -44,6 +45,7 @@ class Graph {
     * Calls dikstra() and prints the graph returned
     * Perform DFS to traverse the SSSP
     */
+
     void print() const;
 
 // dijkstra.cpp
@@ -56,19 +58,22 @@ class Graph {
     * @param start starting airport to search for
     * @return index of starting airport (Airport ID)
     */
+
     int locateStart(std::string airports_file, std::string start);
 
     /**
     * Performs Dijkstra's algorithm on our directed and weighted graph
     * Dijkstra's requires two paremeters, a graph and starting node
-    *   use "this" to refer to the graph and "start" for the starting node
     * @return SSSP graph
     */
-    Graph* dijkstra();
+
+    Graph* dijkstra(Graph* graph, int start);
 
     private:
     std::vector<Edge*> airports;
     int start; // Starting airport
+    std::list<Edge*> adjacency_list;
+
 
     /**
     * Creates an (x, y) point with a given latitude and longitude coordinate
