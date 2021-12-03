@@ -64,7 +64,7 @@ class Graph {
     *   use "this" to refer to the graph and "start" for the starting node
     * @return SSSP graph
     */
-    Graph* dijkstra();
+    Graph* dijkstra(Graph graph, int start);
 
     private:
     std::vector<Edge*> airports;
