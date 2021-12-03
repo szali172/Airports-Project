@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <stack>
+#include <list>
 
 using namespace cs225;
 
@@ -33,7 +34,7 @@ class Graph {
 
     /**
     * Adds an edge to a Graph
-    * @param index index of the vertex edge will be linked to
+    * @param index index of the vertex the edge will be linked to
     * @param edge edge to be added at that index
     */
     void addEdge(int index, Edge* edge);
@@ -48,6 +49,7 @@ class Graph {
     * Calls dikstra() and prints the graph returned
     * Perform DFS to traverse the SSSP
     */
+
     void print() const;
 
 // dijkstra.cpp
@@ -60,6 +62,7 @@ class Graph {
     * @param start starting airport to search for
     * @return index of starting airport (Airport ID)
     */
+
     int locateStart(std::string airports_file, std::string start);
 
     /**
@@ -68,12 +71,16 @@ class Graph {
     * @param starting node
     * @return SSSP graph
     */
-    Graph* dijkstra(Graph graph, int start);
+
+    Graph* dijkstra(Graph* graph, int start);
+
+    double calculateDistance(double longitude, double latitude);
 
     private:
-    std::vector<Edge*> airports; // vertex list
-    int start; // Starting airport
     PNG map;
+    std::vector<Edge*> adjacency_list;
+    int start; // Starting airport
+    //std::list<Edge*> adjacency_list[];
 
     /**
     * Creates an (x, y) point with a given latitude and longitude coordinate
@@ -83,6 +90,15 @@ class Graph {
     * @return 2D point (x, y) that represents the latitude and longitude on the map
     */
     Point<2> createPoint(PNG* map, double lat, double lon);
+
+    
+    /**
+    * Helper function to perform DFS
+    * @param output PNG map to draw on
+    * @param graph SSSP graph passed from Dijkstra's
+    * @param vertex index of the airport in the adjacency list
+    */
+    void print(PNG* output, Graph& graph, int vertex);
 
     /**
     * Helper function for print()
