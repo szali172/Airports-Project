@@ -30,10 +30,10 @@ class Graph {
 
     /**
     * Adds an edge to a Graph
-    * @param index index of the vertex edge will be linked to
+    * @param index index of the vertex the edge will be linked to
     * @param edge edge to be added at that index
     */
-    void addEdge(list<Edge*> adj_list, int index, Edge* edge);
+    void addEdge(int index, Edge* edge);
     
 
 // graph-parse.cpp
@@ -72,7 +72,7 @@ class Graph {
     private:
     std::vector<Edge*> airports;
     int start; // Starting airport
-    std::list<Edge*> adjacency_list;
+    std::list<Edge*> adjacency_list[];
 
 
     /**
