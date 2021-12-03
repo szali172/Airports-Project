@@ -1,6 +1,7 @@
 #include "graph.h"
 #include <list>
-
+#include <cmath>
+#include <math.h>
 
 /*
 / Searches the airport csv file for the starting airport specified by the user.
@@ -18,7 +19,7 @@ int locateStart(std::string airports_file; std::string start) {
         }
     }
 
-    std::cout << "This staring airport cannot be found.  Please check you input and try again." << std::endl;
+    std::cout << "This staring airport cannot be found. Please check your input and try again." << std::endl;
     exit(1);
 }
 
@@ -67,6 +68,25 @@ void Graph::addEdge(int index, Edge* edge) {
     edge->next = temp;
 }
 
-double Graph::calculateDistance(double longitude, double latitude) {
-    return 0.0
+double Graph::calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
+    // getting distance in KILOMETERS
+    double dist = -1.0;
+    double earth_radius = 6371;
+
+    double lat1_radians = latitude1 * (M_PI / 180);
+    double lat2_radians = latitude1 * (M_PI / 180);
+
+    //double lon1_radians = longitude1 * (M_PI / 180);
+    //double lon2_radians = longitude2 * (M_PI / 180);
+
+    double lat_difference_radians = (latitude2 - latitude1) * (M_PI / 180);
+    double long_difference_radians = (longitude2 - longitude1) * (M_PI / 180);
+
+    // setting up a variables a and c for haversine formula
+    double a = ((sin(lat_difference_radians / 2) * sin(lat_difference_radians / 2)) + (cos(lat1_radians) * cos(lat2_radians) * sin(long_difference_radians / 2) * sin(long_difference_radians / 2));
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+
+    dist = earth_radius * c;
+
+    return dist;
 }
