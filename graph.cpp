@@ -8,10 +8,8 @@
 int locateStart(std::string airports_file; std::string start) {
     fstrem fs(airports_file);
 
-    int lineNum = 0;
     string currLine;
     while(getLine(fs, currLine)) {
-        lineNum++;
         if (currLine.find(start, 0) != std::string::npos) {
             int airportID = currLine.substr(0, currLine.find(','));
             return airportID;
