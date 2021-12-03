@@ -1,7 +1,6 @@
 #include "graph.h"
 
 Graph::Graph(std::string airports_file, std::string routes_file) {
-
     std::ifstream data(airports_file);
     std::string line;
 
@@ -26,6 +25,6 @@ Graph::Graph(std::string airports_file, std::string routes_file) {
             ++fileIndex;
         }
 
-        adjacency_list->push_back(new Edge{std::pair<double, double>(longtitude, latitude), nullptr});
+        adjacency_list.push_back(new Edge{std::pair<double, double>(longtitude, latitude), nullptr});
     }
 } 

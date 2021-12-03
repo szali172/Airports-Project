@@ -5,7 +5,7 @@
 * Calls dikstra() and prints the graph returned
 * Perform DFS to traverse the SSSP
 */
-void Graph::print() const {
+void Graph::print() {
     Graph* SSSP = dijkstra(this, start);
     PNG* output = new PNG(map); // Create a copy map to draw on
 

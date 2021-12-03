@@ -50,7 +50,7 @@ class Graph {
     * Perform DFS to traverse the SSSP
     */
 
-    void print() const;
+    void print();
 
 // dijkstra.cpp
     /**
