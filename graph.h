@@ -19,10 +19,14 @@ class Graph {
     * Each edge represents a directed and weighted connection between two airports
     * data.first represents the Airport ID of the destination airport
     * data.second represents the distance (weight) from the source airport to this destination airport
-    * If the Edge is the head of its linked list, data.first represents latitude, data.second represents longitude
+    * label will be used for DFS traversal
+    *   Can either be "UNEXPLORED", "DISCOVERY" or "BACK"
+    * boolean head will tell us if this current node is the head of it's linked list
+    * If the Edge is the head of it's linked list, data.first represents latitude, data.second represents longitude
     */
     struct Edge {
         std::pair<double, double> data;
+        std::string label;
         Edge* next;
     };
 
@@ -63,7 +67,8 @@ class Graph {
 
     /**
     * Performs Dijkstra's algorithm on our directed and weighted graph
-    * Dijkstra's requires two paremeters, a graph and starting node
+    * @param graph perform algorithm on this passed graph
+    * @param starting node
     * @return SSSP graph
     */
 
@@ -72,10 +77,10 @@ class Graph {
     double calculateDistance(double longitude, double latitude);
 
     private:
+    PNG map;
     std::vector<Edge*> adjacency_list;
     int start; // Starting airport
     //std::list<Edge*> adjacency_list[];
-
 
     /**
     * Creates an (x, y) point with a given latitude and longitude coordinate
@@ -85,6 +90,15 @@ class Graph {
     * @return 2D point (x, y) that represents the latitude and longitude on the map
     */
     Point<2> createPoint(PNG* map, double lat, double lon);
+
+    
+    /**
+    * Helper function to perform DFS
+    * @param output PNG map to draw on
+    * @param graph SSSP graph passed from Dijkstra's
+    * @param vertex index of the airport in the adjacency list
+    */
+    void print(PNG* output, Graph& graph, int vertex);
 
     /**
     * Helper function for print()
