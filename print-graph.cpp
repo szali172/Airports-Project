@@ -6,19 +6,46 @@
 * Perform DFS to traverse the SSSP
 */
 void Graph::print() const {
-    Graph* SSSP = dijkstra();
+    Graph* SSSP = dijkstra(this, start);
+    PNG* output = new PNG(map); // Create a copy map to draw on
 
-    // Initialize the visited map for DFS traversal
-    std::vector<bool> visited;
-    for (unsigned i = 0; i < SSSP->airports.size(); i++) {
-        visited.push_back(false);
+    for (int vertex = 1; i < adjacency_list.size(); i++) {
+        if (adjacency_list[vertex].label == "UNEXPLORED") {
+            print(output, SSSP, vertex);
+        }
     }
-
-    std::stack<Edge*> stack; // Stack for DFS traversal
-    stack.push(SSSP->airports[start]); // Queue starting node
-
-
 }
+
+/**
+* Helper function to perform DFS
+* @param output PNG map to draw on
+* @param graph SSSP graph passed from Dijkstra's
+* @param vertex index of the airport in the adjacency list
+*/
+void Graph::print(PNG* output, Graph& graph, int vertex) {
+    graph.adjacency_list[vertex].label = "VISITED";
+    Point<2> src = createPoint(graph.adjacency_list[vertex].data.first, graph.adjacency_list[vertex].data.second);
+    printVertex(output, src);
+
+    Edge* curr = graph.adjacency_list[vertex]; // curr == head
+    if (curr->next != NULL) curr = curr->next; // curr == next adjacent vertex
+    else return; // next adjacent vertex does not exist
+
+    while (curr) {
+        if (graph.adjacency_list[curr->data.first].label == "UNEXPLORED") {
+            curr->label = "DISCOVERY";
+            Point<2> dest = createPoint(graph.adjacency_list[curr->data.first].data.first, graph.adjacency_list[curr->data.first].data.second);
+            printEdge(output, src, dest);
+            print(output, graph, curr->data.first)
+        }
+        // Vertex has been already been visited
+        // This edge is labeled as a back edge
+        else if (curr->label == "UNEXPLORED") {
+            curr->label = "BACK";
+        }
+    }
+}
+
 
 /**
 * Creates an (x, y) point with a given latitude and longitude coordinate
@@ -27,17 +54,17 @@ void Graph::print() const {
 * @param lon longitude
 * @return 2D point (x, y) that represents the latitude and longitude on the map
 */
-Point<2> Graph::createPoint(PNG* map, double lat, double lon) {
-    int x = (int)((map->width()/2) - ((map->width()/2)/180) * abs(lon));
-    int y = (int)((map->height()/2) - ((map->height()/2)/90) * abs(lat));
+Point<2> Graph::createPoint(double lat, double lon) {
+    int x = (int)((map.width()/2) - ((map.width()/2)/180) * abs(lon));
+    int y = (int)((map.height()/2) - ((map.height()/2)/90) * abs(lat));
 
     // If latitude is negative
     if (lat < 0) {
-        y = map->height() - y;
+        y = map.height() - y;
     }
     // If longitude is positive
     if (lon > 0) {
-        x = map->width() - x;
+        x = map.width() - x;
     }
 
     return Point(x, y);
@@ -100,7 +127,7 @@ void Graph::printEdge(PNG* map, Point<2> src, Point<2> dest) {
         if (yMove == 1) j++;
         else if (yMove == -1) j--;
 
-        HSLAPixel & pixel = map.getPixel(i, j);
+        HSLAPixel & pixel = map->getPixel(i, j);
         pixel.h = 2;
         pixel.s = 0.8;
         pixel.l = 0.47;
