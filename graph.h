@@ -19,7 +19,7 @@ class Graph {
     * Each edge represents a directed and weighted connection between two airports
     * data.first represents the Airport ID of the destination airport
     * data.second represents the distance (weight) from the source airport to this destination airport
-    * If the Edge is the head of it's linked list, data.first represents latitude, data.second represents longitude
+    * If the Edge is the head of its linked list, data.first represents latitude, data.second represents longitude
     */
     struct Edge {
         std::pair<double, double> data;
@@ -69,10 +69,12 @@ class Graph {
 
     Graph* dijkstra(Graph* graph, int start);
 
+    double calculateDistance(double longitude, double latitude);
+
     private:
-    std::vector<Edge*> airports;
+    std::vector<Edge*> adjacency_list;
     int start; // Starting airport
-    std::list<Edge*> adjacency_list[];
+    //std::list<Edge*> adjacency_list[];
 
 
     /**
