@@ -8,7 +8,7 @@
 / Returns the airport ID if the airport is found.
 / If the airport is not found, prints error message and exits code.
 */
-int locateStart(std::string airports_file; std::string start) {
+int locateStart(std::string airports_file, std::string start) {
     fstrem fs(airports_file);
 
     string currLine;
