@@ -9,9 +9,9 @@ void Graph::print() {
     Graph* SSSP = dijkstra(this, start);
     PNG* output = new PNG(map); // Create a copy map to draw on
 
-    for (int vertex = 1; i < adjacency_list.size(); i++) {
-        if (adjacency_list[vertex].label == "UNEXPLORED") {
-            print(output, SSSP, vertex);
+    for (int vertex = 1; vertex < adjacency_list.size(); vertex++) {
+        if (adjacency_list[vertex]->label == "UNEXPLORED") {
+            print(output, *SSSP, vertex);
         }
     }
 }
@@ -23,8 +23,8 @@ void Graph::print() {
 * @param vertex index of the airport in the adjacency list
 */
 void Graph::print(PNG* output, Graph& graph, int vertex) {
-    graph.adjacency_list[vertex].label = "VISITED";
-    Point<2> src = createPoint(graph.adjacency_list[vertex].data.first, graph.adjacency_list[vertex].data.second);
+    graph.adjacency_list[vertex]->label = "VISITED";
+    Point<2> src = createPoint(graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
     printVertex(output, src);
 
     Edge* curr = graph.adjacency_list[vertex]; // curr == head
@@ -32,11 +32,11 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
     else return; // next adjacent vertex does not exist
 
     while (curr) {
-        if (graph.adjacency_list[curr->data.first].label == "UNEXPLORED") {
+        if (graph.adjacency_list[curr->data.first]->label == "UNEXPLORED") {
             curr->label = "DISCOVERY";
-            Point<2> dest = createPoint(graph.adjacency_list[curr->data.first].data.first, graph.adjacency_list[curr->data.first].data.second);
+            Point<2> dest = createPoint(graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
             printEdge(output, src, dest);
-            print(output, graph, curr->data.first)
+            print(output, graph, curr->data.first);
         }
         // Vertex has been already been visited
         // This edge is labeled as a back edge
@@ -67,7 +67,13 @@ Point<2> Graph::createPoint(double lat, double lon) {
         x = map.width() - x;
     }
 
-    return Point(x, y);
+    Point<2> p(x, y);
+
+    return p;
+}
+
+Point<2> Graph::createPoint(PNG* map, double lat, double lon) {
+    //TODO
 }
 
 /**
@@ -77,7 +83,7 @@ Point<2> Graph::createPoint(double lat, double lon) {
 * @param airport (x, y) coordinate for the airport
 */
 void Graph::printVertex(PNG* map, Point<2> airport) {
-    HSLAPixel & pixel;
+    HSLAPixel pixel;
     pixel.h = 2;
     pixel.s = 0.8;
     pixel.l = 0.47;

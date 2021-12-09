@@ -75,7 +75,7 @@ class Graph {
 
     Graph* dijkstra(Graph* graph, int start);
 
-    double calculateDistance(double longitude, double latitude);
+    double calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
     private:
     PNG map;
@@ -91,6 +91,8 @@ class Graph {
     * @return 2D point (x, y) that represents the latitude and longitude on the map
     */
     Point<2> createPoint(PNG* map, double lat, double lon);
+
+    Point<2> createPoint(double lat, double lon);
 
     
     /**
