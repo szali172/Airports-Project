@@ -1,6 +1,5 @@
 #pragma once
 
-#include "point.h"
 #include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
 
@@ -10,6 +9,8 @@
 #include <vector>
 #include <stack>
 #include <list>
+
+#include "point.h"
 
 using namespace cs225;
 
