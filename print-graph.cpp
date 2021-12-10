@@ -5,13 +5,13 @@
 * Calls dikstra() and prints the graph returned
 * Perform DFS to traverse the SSSP
 */
-void Graph::print() const {
+void Graph::print() {
     Graph* SSSP = dijkstra(this, start);
     PNG* output = new PNG(map); // Create a copy map to draw on
 
-    for (int vertex = 1; i < adjacency_list.size(); i++) {
-        if (adjacency_list[vertex].label == "UNEXPLORED") {
-            print(output, SSSP, vertex);
+    for (int vertex = 1; vertex < adjacency_list.size(); vertex++) {
+        if (adjacency_list[vertex]->label == "UNEXPLORED") {
+            print(output, *SSSP, vertex);
         }
     }
 }
@@ -23,8 +23,8 @@ void Graph::print() const {
 * @param vertex index of the airport in the adjacency list
 */
 void Graph::print(PNG* output, Graph& graph, int vertex) {
-    graph.adjacency_list[vertex].label = "VISITED";
-    Point<2> src = createPoint(graph.adjacency_list[vertex].data.first, graph.adjacency_list[vertex].data.second);
+    graph.adjacency_list[vertex]->label = "VISITED";
+    Point<2> src = createPoint(graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
     printVertex(output, src);
 
     Edge* curr = graph.adjacency_list[vertex]; // curr == head
@@ -32,9 +32,9 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
     else return; // next adjacent vertex does not exist
 
     while (curr) {
-        if (graph.adjacency_list[curr->data.first].label == "UNEXPLORED") {
+        if (graph.adjacency_list[curr->data.first]->label == "UNEXPLORED") {
             curr->label = "DISCOVERY";
-            Point<2> dest = createPoint(graph.adjacency_list[curr->data.first].data.first, graph.adjacency_list[curr->data.first].data.second);
+            Point<2> dest = createPoint(graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
             printEdge(output, src, dest);
             // Recursive call
             print(output, graph, curr->data.first)
@@ -51,7 +51,6 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
 
 /**
 * Creates an (x, y) point with a given latitude and longitude coordinate
-* @param map used to scale the (x, y) coordinate within the bounds of the image
 * @param lat latitude
 * @param lon longitude
 * @return 2D point (x, y) that represents the latitude and longitude on the map
@@ -69,8 +68,11 @@ Point<2> Graph::createPoint(double lat, double lon) {
         x = map.width() - x;
     }
 
-    return Point(x, y);
+    Point<2> p(x, y);
+
+    return p;
 }
+
 
 /**
 * Helper function for print()
@@ -79,7 +81,7 @@ Point<2> Graph::createPoint(double lat, double lon) {
 * @param airport (x, y) coordinate for the airport
 */
 void Graph::printVertex(PNG* map, Point<2> airport) {
-    HSLAPixel & pixel;
+    HSLAPixel pixel;
     pixel.h = 2;
     pixel.s = 0.8;
     pixel.l = 0.47;

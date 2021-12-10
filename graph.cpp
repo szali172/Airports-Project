@@ -9,12 +9,12 @@
 / If the airport is not found, prints error message and exits code.
 */
 int locateStart(std::string airports_file, std::string start) {
-    fstrem fs(airports_file);
+    std::ifstream fs(airports_file);
 
     string currLine;
-    while(getLine(fs, currLine)) {
+    while(std::getline(fs, currLine)) {
         if (currLine.find(start, 0) != std::string::npos) {
-            int airportID = currLine.substr(0, currLine.find(','));
+            int airportID = std::stoi(currLine.substr(0, currLine.find(',')));
             return airportID;
         }
     }
@@ -27,7 +27,8 @@ int locateStart(std::string airports_file, std::string start) {
 / Dijkstra's algorithm to find the shortest path for a graph using adjacency list
 */
 // graph = adjacency_list after all airports and all neighbors have been added
-Graph* Graph::dijkstra(Graph graph, int start) {
+Graph* Graph::dijkstra(Graph* graph, int start) {
+    /*
     for (Vertex v : graph) {
         dist[v] = +inf;
         prev[v] = NULL;
@@ -53,6 +54,8 @@ Graph* Graph::dijkstra(Graph graph, int start) {
             }
         }
     }
+    */
+   return nullptr;
 }
 
 void Graph::addEdge(int index, Edge* edge) {
@@ -83,7 +86,7 @@ double Graph::calculateDistance(double longitude1, double latitude1, double long
     double long_difference_radians = (longitude2 - longitude1) * (M_PI / 180);
 
     // setting up a variables a and c for haversine formula
-    double a = ((sin(lat_difference_radians / 2) * sin(lat_difference_radians / 2)) + (cos(lat1_radians) * cos(lat2_radians) * sin(long_difference_radians / 2) * sin(long_difference_radians / 2));
+    double a = ((sin(lat_difference_radians / 2) * sin(lat_difference_radians / 2)) + (cos(lat1_radians) * cos(lat2_radians) * sin(long_difference_radians / 2) * sin(long_difference_radians / 2)));
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
     dist = earth_radius * c;

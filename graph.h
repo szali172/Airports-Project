@@ -1,6 +1,5 @@
 #pragma once
 
-#include "point.h"
 #include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
 
@@ -10,6 +9,8 @@
 #include <vector>
 #include <stack>
 #include <list>
+
+#include "point.h"
 
 using namespace cs225;
 
@@ -66,7 +67,7 @@ class Graph {
     * Perform DFS to traverse the SSSP
     */
 
-    void print() const;
+    void print();
 
 // dijkstra.cpp
     /**
@@ -78,7 +79,6 @@ class Graph {
     * @param start starting airport to search for
     * @return index of starting airport (Airport ID)
     */
-
     int locateStart(std::string airports_file, std::string start);
 
     /**
@@ -89,8 +89,11 @@ class Graph {
     */
     Graph* dijkstra(Graph* graph, int start);
 
-    double calculateDistance(double longitude, double latitude);
+    double calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
+    /**
+    * Getter for start member variable
+    */
     int getStart();
 
     private:
@@ -99,16 +102,19 @@ class Graph {
     int start; // Starting airport
     //std::list<Edge*> adjacency_list[];
 
+    /**
+    * Setter for private member start
+    */
     void setStart(int index);
 
+// print-graph.cpp helper functions
     /**
     * Creates an (x, y) point with a given latitude and longitude coordinate
-    * @param map used to scale the (x, y) coordinate within the bounds of the image
     * @param lat latitude
     * @param lon longitude
     * @return 2D point (x, y) that represents the latitude and longitude on the map
     */
-    Point<2> createPoint(PNG* map, double lat, double lon);
+    Point<2> createPoint(double lat, double lon);
     
     /**
     * Helper function to perform DFS
