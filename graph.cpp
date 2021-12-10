@@ -3,6 +3,24 @@
 #include <cmath>
 #include <math.h>
 
+/**
+* Constructs an empty graph
+* Both Vertex and Edge list will be empty
+*/
+Graph::Graph() {
+    //TODO
+}
+
+/**
+* Constructs the Vertex list, but not the Edges
+* Used for Dijkstra's
+*/
+Graph::Graph(std::string airports_file) {
+    std::cout << airports_file << std::endl;
+    //TODO
+}
+
+
 /*
 / Searches the airport csv file for the starting airport specified by the user.
 / Returns the airport ID if the airport is found.
