@@ -9,13 +9,7 @@
 #include <vector>
 #include <stack>
 #include <list>
-<<<<<<< HEAD
-#include <queue>
-
-#include "point.h"
-=======
 #include <cmath>
->>>>>>> 72b969909ea0fa8b59aa0347e24548077742d270
 
 using namespace cs225;
 class Graph {
@@ -51,19 +45,9 @@ class Graph {
         std::string label;
         // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
         Edge* next;
-<<<<<<< HEAD
-        Edge* prev;
-    };
-
-    class EdgeComparator {
-        public:
-        double operator()(Edge* edge1, Edge* edge2) {
-            return edge1->data.second > edge2->data.second;
-=======
         Edge(std::pair<double, double> data_, std::string label_) {
             data = data_;
             label = label_;
->>>>>>> 72b969909ea0fa8b59aa0347e24548077742d270
         }
     };
 
@@ -142,6 +126,11 @@ class Graph {
     int getStart();
 
     private:
+    PNG map;
+    std::vector<Edge*> adjacency_list;
+    int start; // Starting airport
+    //std::list<Edge*> adjacency_list[];
+
     /**
     * Setter for private member start
     */
@@ -172,22 +161,5 @@ class Graph {
     * @param src source airport
     * @param dest destination airport
     */
-<<<<<<< HEAD
-    void printEdge(PNG* map, Point<2> src, Point<2> dest);
-
-    // Queue helper functions
-
-    // Replaces/edits an element in the queue
-    void replace(Edge* toReplace, Edge* toInsert);
-
-    // Removes an element from the queue (replace() helper function...?)
-    void remove(Edge* element);
-
-    std::vector<Edge*> adjacency_list;
-    std::priority_queue<double, std::vector<double>, EdgeComparator> pq;
-    int start;
-    PNG map;
-=======
     void printEdge(PNG* map, Point src, Point dest);
->>>>>>> 72b969909ea0fa8b59aa0347e24548077742d270
 };
