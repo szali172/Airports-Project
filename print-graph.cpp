@@ -1,5 +1,4 @@
 #include "graph.h"
-#include <math.h>
 
 /*
 * Prints all the airports and routes onto a PNG

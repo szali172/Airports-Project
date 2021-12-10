@@ -16,6 +16,23 @@ namespace Graph {
 class Graph {
     public:
     /**
+    * Constructs an empty graph
+    * Both Vertex and Edge list will be empty
+    */
+    Graph();
+
+    /**
+    * Constructs the Vertex list, but not the Edges
+    * Used for Dijkstra's
+    */
+    Graph(std::string airports_file);
+
+    /**
+    * Constructs both Vertex and Edge list
+    */
+    Graph(std::string airports_file, std::string routes_file);
+    
+    /**
     * Each edge represents a directed and weighted connection between two airports
     * data.first represents the Airport ID of the destination airport
     * data.second represents the distance (weight) from the source airport to this destination airport
@@ -47,18 +64,6 @@ class Graph {
     };
 
     /**
-    * Constructs an empty graph
-    * Both Vertex and Edge list will be empty
-    */
-    Graph();
-
-    /**
-    * Constructs the Vertex list, but not the Edges
-    * Used for Dijkstra's
-    */
-    Graph(std::string airports_file);
-
-    /**
     * Adds an edge to a Graph
     * @param index index of the vertex the edge will be linked to
     * @param edge edge to be added at that index
@@ -73,7 +78,6 @@ class Graph {
     
 
 // graph-parse.cpp
-    Graph(std::string airports_file, std::string routes_file);
     void airportParse(std::string airports_file);
     void routeParse(std::string routes_file);
 

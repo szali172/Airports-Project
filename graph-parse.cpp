@@ -1,5 +1,16 @@
 #include "graph.h"
 
+/**
+* Constructs the Vertex list, but not the Edges
+* Used for Dijkstra's
+*/
+Graph::Graph(std::string airports_file) {
+    airportParse(airports_file);
+}
+
+/**
+* Constructs both Vertex and Edge list
+*/
 Graph::Graph(std::string airports_file, std::string routes_file) {
     airportParse(airports_file);
     routeParse(routes_file);
