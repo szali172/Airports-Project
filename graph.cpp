@@ -2,6 +2,8 @@
 #include <list>
 #include <cmath>
 #include <math.h>
+#include <limits>
+#include <queue>
 
 /*
 / Searches the airport csv file for the starting airport specified by the user.
@@ -28,14 +30,18 @@ int locateStart(std::string airports_file, std::string start) {
 */
 // graph = adjacency_list after all airports and all neighbors have been added
 Graph* Graph::dijkstra(Graph* graph, int start) {
-    /*
-    for (Vertex v : graph) {
-        dist[v] = +inf;
-        prev[v] = NULL;
+    int inf = std::numeric_limits<int>::max();
+    Edge* prev;
+
+    for (Edge* v : adjacency_list) {
+        v->data.second = inf;
+        v->prev = NULL;
     }
-    dist[start] = 0;
-    PriorityQueue Q;
+    adjacency_list[start]->data.second = 0;
+    std::priority_queue<int> pq;
+    
     Q.makeHeap(graph.vertices());
+
     Graph T;
 
     for (int i = 0; i < n; i++) {
@@ -54,7 +60,6 @@ Graph* Graph::dijkstra(Graph* graph, int start) {
             }
         }
     }
-    */
    return nullptr;
 }
 
@@ -69,6 +74,10 @@ void Graph::addEdge(int index, Edge* edge) {
     Edge* temp = adjacency_list[index]->next;
     adjacency_list[index]->next = edge;
     edge->next = temp;
+}
+
+void addVertex(Edge* vertex) {
+    adjacency_list.push_back(vertex);
 }
 
 double Graph::calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
@@ -92,4 +101,22 @@ double Graph::calculateDistance(double longitude1, double latitude1, double long
     dist = earth_radius * c;
 
     return dist;
+}
+
+void replace(Edge* toReplace, Edge* toInsert) {
+    pq.remove(toReplace);
+    pq.push(toInsert);
+}
+
+void remove(double element) {
+    std::priority_queue <Edge*, std::vector<Edge*>, Graph::EdgeComparator> pq_helper;
+
+    while (!(pq.empty())) {
+        if (pq.top()->data.second != element) {
+            pq_helper.push(pq.top());
+            pq.pop();
+        } else {
+            pq.pop();
+        }
+    } 
 }

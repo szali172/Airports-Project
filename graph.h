@@ -9,6 +9,7 @@
 #include <vector>
 #include <stack>
 #include <list>
+#include <queue>
 
 #include "point.h"
 
@@ -28,7 +29,16 @@ class Graph {
     struct Edge {
         std::pair<double, double> data;
         std::string label;
+        // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
         Edge* next;
+        Edge* prev;
+    };
+
+    class EdgeComparator {
+        public:
+        double operator()(Edge* edge1, Edge* edge2) {
+            return edge1->data.second > edge2->data.second;
+        }
     };
 
     Graph();
@@ -78,11 +88,6 @@ class Graph {
     double calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
     private:
-    PNG map;
-    std::vector<Edge*> adjacency_list;
-    int start; // Starting airport
-    //std::list<Edge*> adjacency_list[];
-
     /**
     * Creates an (x, y) point with a given latitude and longitude coordinate
     * @param map used to scale the (x, y) coordinate within the bounds of the image
@@ -119,4 +124,17 @@ class Graph {
     * @param dest destination airport
     */
     void printEdge(PNG* map, Point<2> src, Point<2> dest);
+
+    // Queue helper functions
+
+    // Replaces/edits an element in the queue
+    void replace(Edge* toReplace, Edge* toInsert);
+
+    // Removes an element from the queue (replace() helper function...?)
+    void remove(Edge* element);
+
+    std::vector<Edge*> adjacency_list;
+    std::priority_queue<double, std::vector<double>, EdgeComparator> pq;
+    int start;
+    PNG map;
 };
