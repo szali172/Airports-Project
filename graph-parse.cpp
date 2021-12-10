@@ -44,14 +44,14 @@ Graph::Graph(std::string airports_file, std::string routes_file) {
 
     const size_t SOURCE_INDEX = 3;
     const size_t DESTINATION_INDEX = 5;
-    int fileIndex = 0;
+    fileIndex = 0;
 
     //
     // BELOW NEEDS TO BE EDITED
     //
 
     // gives us an index to insert into, starts at 1 because we don't want to insert into 0th
-    int index = 1;
+    index = 1;
 
     while (std::getline(data, line)) {
         std::stringstream lineStream(line);

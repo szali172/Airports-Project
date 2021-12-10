@@ -3,6 +3,9 @@
 #include <cmath>
 #include <math.h>
 
+Graph::Graph() {
+    map.readFromFile("base_map.png");
+}
 /*
 / Searches the airport csv file for the starting airport specified by the user.
 / Returns the airport ID if the airport is found.
