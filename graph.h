@@ -12,7 +12,6 @@
 #include <cmath>
 
 using namespace cs225;
-namespace Graph {
 class Graph {
     public:
     /**
@@ -163,4 +162,3 @@ class Graph {
     */
     void printEdge(PNG* map, Point src, Point dest);
 };
-}
