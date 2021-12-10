@@ -7,7 +7,7 @@ TEST = test
 
 # Add all object files needed for compiling:
 EXE_OBJ = main.o
-OBJS = main.o point.o dijkstra.o graph-parse.o print-graph.o graph.o  
+OBJS = main.o graph-parse.o print-graph.o graph.o  
 
 # Use the cs225 makefile template:
 include cs225/make/cs225.mk

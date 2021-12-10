@@ -9,14 +9,34 @@
 #include <vector>
 #include <stack>
 #include <list>
+<<<<<<< HEAD
 #include <queue>
 
 #include "point.h"
+=======
+#include <cmath>
+>>>>>>> 72b969909ea0fa8b59aa0347e24548077742d270
 
 using namespace cs225;
-
 class Graph {
     public:
+    /**
+    * Constructs an empty graph
+    * Both Vertex and Edge list will be empty
+    */
+    Graph();
+
+    /**
+    * Constructs the Vertex list, but not the Edges
+    * Used for Dijkstra's
+    */
+    Graph(std::string airports_file);
+
+    /**
+    * Constructs both Vertex and Edge list
+    */
+    Graph(std::string airports_file, std::string routes_file);
+    
     /**
     * Each edge represents a directed and weighted connection between two airports
     * data.first represents the Airport ID of the destination airport
@@ -31,6 +51,7 @@ class Graph {
         std::string label;
         // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
         Edge* next;
+<<<<<<< HEAD
         Edge* prev;
     };
 
@@ -38,10 +59,25 @@ class Graph {
         public:
         double operator()(Edge* edge1, Edge* edge2) {
             return edge1->data.second > edge2->data.second;
+=======
+        Edge(std::pair<double, double> data_, std::string label_) {
+            data = data_;
+            label = label_;
+>>>>>>> 72b969909ea0fa8b59aa0347e24548077742d270
         }
     };
 
-    Graph();
+    struct Point {
+        int x;
+        int y;
+        Point(int x_, int y_) {
+            x = x_;
+            y = y_;
+        }
+        bool operator==(Point other) const {
+            return this->x == other.x && this->y == other.y;
+        }
+    };
 
     /**
     * Adds an edge to a Graph
@@ -50,9 +86,16 @@ class Graph {
     */
     void addEdge(int index, Edge* edge);
     
+    /**
+    * Adds a vertex to the adjacency list
+    * Pushes vertex to end of the list
+    */
+    void addVertex(Edge* vertex);
+    
 
 // graph-parse.cpp
-    Graph(std::string airports_file, std::string routes_file);
+    void airportParse(std::string airports_file);
+    void routeParse(std::string routes_file);
 
 // print-graph.cpp
     /**
@@ -60,8 +103,16 @@ class Graph {
     * Calls dikstra() and prints the graph returned
     * Perform DFS to traverse the SSSP
     */
-
     void print();
+
+    /**
+    * Creates an (x, y) point with a given latitude and longitude coordinate
+    * @param lat latitude
+    * @param lon longitude
+    * @return 2D point (x, y) that represents the latitude and longitude on the map
+    */
+    Point createPoint(double lat, double lon);
+
 
 // dijkstra.cpp
     /**
@@ -73,7 +124,6 @@ class Graph {
     * @param start starting airport to search for
     * @return index of starting airport (Airport ID)
     */
-
     int locateStart(std::string airports_file, std::string start);
 
     /**
@@ -82,23 +132,22 @@ class Graph {
     * @param starting node
     * @return SSSP graph
     */
-
     Graph* dijkstra(Graph* graph, int start);
 
     double calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
+    /**
+    * Getter for start member variable
+    */
+    int getStart();
+
     private:
     /**
-    * Creates an (x, y) point with a given latitude and longitude coordinate
-    * @param map used to scale the (x, y) coordinate within the bounds of the image
-    * @param lat latitude
-    * @param lon longitude
-    * @return 2D point (x, y) that represents the latitude and longitude on the map
+    * Setter for private member start
     */
-    Point<2> createPoint(PNG* map, double lat, double lon);
+    void setStart(int index);
 
-    Point<2> createPoint(double lat, double lon);
-
+// print-graph.cpp helper functions
     
     /**
     * Helper function to perform DFS
@@ -114,7 +163,7 @@ class Graph {
     * @param map PNG to draw on
     * @param airport (x, y) coordinate for the airport
     */
-    void printVertex(PNG* map, Point<2> airport);
+    void printVertex(PNG* map, Point airport);
 
     /**
     * Helper function for print()
@@ -123,6 +172,7 @@ class Graph {
     * @param src source airport
     * @param dest destination airport
     */
+<<<<<<< HEAD
     void printEdge(PNG* map, Point<2> src, Point<2> dest);
 
     // Queue helper functions
@@ -137,4 +187,7 @@ class Graph {
     std::priority_queue<double, std::vector<double>, EdgeComparator> pq;
     int start;
     PNG map;
+=======
+    void printEdge(PNG* map, Point src, Point dest);
+>>>>>>> 72b969909ea0fa8b59aa0347e24548077742d270
 };
