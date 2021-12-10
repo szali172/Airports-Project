@@ -10,8 +10,6 @@
 #include <stack>
 #include <list>
 
-#include "point.h"
-
 using namespace cs225;
 
 class Graph {
@@ -29,6 +27,15 @@ class Graph {
         std::pair<double, double> data;
         std::string label;
         Edge* next;
+        Edge(std::pair<double, double> data_, std::string label_) {
+            data = data_;
+            label = label_;
+        }
+    };
+
+    struct Point {
+        int x;
+        int y;
     };
 
     /**
@@ -114,7 +121,7 @@ class Graph {
     * @param lon longitude
     * @return 2D point (x, y) that represents the latitude and longitude on the map
     */
-    Point<2> createPoint(double lat, double lon);
+    Point createPoint(double lat, double lon);
     
     /**
     * Helper function to perform DFS
@@ -130,7 +137,7 @@ class Graph {
     * @param map PNG to draw on
     * @param airport (x, y) coordinate for the airport
     */
-    void printVertex(PNG* map, Point<2> airport);
+    void printVertex(PNG* map, Point airport);
 
     /**
     * Helper function for print()
@@ -139,5 +146,5 @@ class Graph {
     * @param src source airport
     * @param dest destination airport
     */
-    void printEdge(PNG* map, Point<2> src, Point<2> dest);
+    void printEdge(PNG* map, Point src, Point dest);
 };
