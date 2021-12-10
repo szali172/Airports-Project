@@ -36,6 +36,7 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
             curr->label = "DISCOVERY";
             Point<2> dest = createPoint(graph.adjacency_list[curr->data.first].data.first, graph.adjacency_list[curr->data.first].data.second);
             printEdge(output, src, dest);
+            // Recursive call
             print(output, graph, curr->data.first)
         }
         // Vertex has been already been visited
@@ -43,6 +44,7 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
         else if (curr->label == "UNEXPLORED") {
             curr->label = "BACK";
         }
+        curr = curr->next;
     }
 }
 

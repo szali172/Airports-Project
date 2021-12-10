@@ -30,7 +30,17 @@ class Graph {
         Edge* next;
     };
 
+    /**
+    * Constructs an empty graph
+    * Both Vertex and Edge list will be empty
+    */
     Graph();
+
+    /**
+    * Constructs the Vertex list, but not the Edges
+    * Used for Dijkstra's
+    */
+    Graph(std::string airports_file);
 
     /**
     * Adds an edge to a Graph
@@ -38,6 +48,12 @@ class Graph {
     * @param edge edge to be added at that index
     */
     void addEdge(int index, Edge* edge);
+    
+    /**
+    * Adds a vertex to the adjacency list
+    * Pushes vertex to end of the list
+    */
+    void addVertex(Edge* vertex);
     
 
 // graph-parse.cpp
@@ -71,16 +87,19 @@ class Graph {
     * @param starting node
     * @return SSSP graph
     */
-
     Graph* dijkstra(Graph* graph, int start);
 
     double calculateDistance(double longitude, double latitude);
+
+    int getStart();
 
     private:
     PNG map;
     std::vector<Edge*> adjacency_list;
     int start; // Starting airport
     //std::list<Edge*> adjacency_list[];
+
+    void setStart(int index);
 
     /**
     * Creates an (x, y) point with a given latitude and longitude coordinate
@@ -90,7 +109,6 @@ class Graph {
     * @return 2D point (x, y) that represents the latitude and longitude on the map
     */
     Point<2> createPoint(PNG* map, double lat, double lon);
-
     
     /**
     * Helper function to perform DFS
