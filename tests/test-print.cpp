@@ -40,21 +40,70 @@ using namespace cs225;
 */
 TEST_CASE("DFS traversal", "[weight=0][part=3]") {
     Graph dfs();
+    PNG png(); // Blank PNG to pass into DFS function, Will not be edited or returned
 
     // Create vertex list
     dfs.addVertex(NULL);
-    dfs.addVertex(Edge one());
-    dfs.addVertex(Edge two());
-    dfs.addVertex(Edge three());
-    dfs.addVertex(Edge four());
-    dfs.addVertex(Edge five());
-    dfs.addVertex(Edge six());
-    dfs.addVertex(Edge seven());
+    dfs.addVertex(Edge one(std::pair<double, double>(-0.33, 0.5), "UNEXPLORED"));
+    dfs.addVertex(Edge two(std::pair<double, double>(0.33, 0.5), "UNEXPLORED")));
+    dfs.addVertex(Edge three(std::pair<double, double>(0.33, -0.5), "UNEXPLORED")));
+    dfs.addVertex(Edge four(std::pair<double, double>(-0.33, -0.5), "UNEXPLORED")));
+    dfs.addVertex(Edge five(std::pair<double, double>(-0.33, 0.7), "UNEXPLORED")));
+    dfs.addVertex(Edge six(std::pair<double, double>(-0.34, 0.5), "UNEXPLORED")));
+    dfs.addVertex(Edge seven(std::pair<double, double>(-0.13, 0.5), "UNEXPLORED")));
 
     // Create edge list
-    Edge A(); 
-    A.data = 
-    dfs.addEdge(1, Edge{std::pair<double, double>(2, 41), nullptr});
+    Edge A(std::pair<double, double>(2, 41), "UNEXPLORED");
+    Edge B(std::pair<double, double>(4, 70), "UNEXPLORED");
+    Edge C(std::pair<double, double>(3, 61), "UNEXPLORED");
+    Edge D(std::pair<double, double>(1, 41), "UNEXPLORED");
+    Edge E(std::pair<double, double>(5, 71), "UNEXPLORED");
+    Edge F(std::pair<double, double>(2, 61), "UNEXPLORED");
+    Edge G(std::pair<double, double>(7, 22), "UNEXPLORED");
+    Edge H(std::pair<double, double>(6, 27), "UNEXPLORED");
+    Edge I(std::pair<double, double>(1, 40), "UNEXPLORED");
+    Edge J(std::pair<double, double>(5, 21), "UNEXPLORED");
+    Edge K(std::pair<double, double>(3, 39), "UNEXPLORED");
+    Edge L(std::pair<double, double>(5, 34), "UNEXPLORED");
+
+    dfs.addEdge(1, B);
+    dfs.addEdge(1, A);
+    dfs.addEdge(2, E);
+    dfs.addEdge(2, D);
+    dfs.addEdge(2, C);
+    dfs.addEdge(3, G);
+    dfs.addEdge(3, F);
+    dfs.addEdge(4, H);
+    dfs.addEdge(6, K);
+    dfs.addEdge(6, J);
+    dfs.addEdge(6, I);
+    dfs.addEdge(7, L);
+
+    // Call function to perform DFS
+    print(png, dfs, 1);
+
+    // Make sure all vertices have been visited
+    REQUIRE(one.label == "VISITED");
+    REQUIRE(two.label == "VISITED");
+    REQUIRE(three.label == "VISITED");
+    REQUIRE(four.label == "VISITED");
+    REQUIRE(five.label == "VISITED");
+    REQUIRE(six.label == "VISITED");
+    REQUIRE(seven.label == "VISITED");
+
+    // Starting at Vertex one, specific edges will either "DISCOVERY" or "BACK"
+    REQUIRE(A.label == "DISCOVERY");
+    REQUIRE(B.label == "DISCOVERY");
+    REQUIRE(C.label == "DISCOVERY");
+    REQUIRE(D.label == "BACK");
+    REQUIRE(E.label == "BACK");
+    REQUIRE(F.label == "BACK");
+    REQUIRE(G.label == "DISCOVERY");
+    REQUIRE(H.label == "DISCOVERY");
+    REQUIRE(I.label == "BACK");
+    REQUIRE(J.label == "BACK");
+    REQUIRE(K.label == "BACK");
+    REQUIRE(L.label == "DISCOVERY");
 }
 
 
