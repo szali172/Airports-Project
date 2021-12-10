@@ -10,16 +10,14 @@
 #include "../cs225/HSLAPixel.h"
 
 using namespace cs225;
-using namespace Graph;
-
 
 TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
   Graph g;
-  REQUIRE(g.createPoint(10, 67.34) == Point(3435, 1111));
-  REQUIRE(g.createPoint(-45.33, -10) == Point(1870, 1388));
-  REQUIRE(g.createPoint(90, 180) == Point(5000, 0)); // Top-Right Corner
-  REQUIRE(g.createPoint(-90, -180) == Point(0, 2500)); // Bottom-Left Corner
-  REQUIRE(g.createPoint(0, 0) == Point(2500, 1250)); // Center
+  REQUIRE(g.createPoint(10, 67.34) == Graph::Point(3435, 1111));
+  REQUIRE(g.createPoint(-45.33, -10) == Graph::Point(1870, 1388));
+  REQUIRE(g.createPoint(90, 180) == Graph::Point(5000, 0)); // Top-Right Corner
+  REQUIRE(g.createPoint(-90, -180) == Graph::Point(0, 2500)); // Bottom-Left Corner
+  REQUIRE(g.createPoint(0, 0) == Graph::Point(2500, 1250)); // Center
 }
 
 /**
@@ -51,40 +49,40 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
 
     // Create vertex list
     dfs.addVertex(NULL);
-    dfs.addVertex(Edge one(std::pair<double, double>(-0.33, 0.5), "UNEXPLORED"));
-    dfs.addVertex(Edge two(std::pair<double, double>(0.33, 0.5), "UNEXPLORED")));
-    dfs.addVertex(Edge three(std::pair<double, double>(0.33, -0.5), "UNEXPLORED")));
-    dfs.addVertex(Edge four(std::pair<double, double>(-0.33, -0.5), "UNEXPLORED")));
-    dfs.addVertex(Edge five(std::pair<double, double>(-0.33, 0.7), "UNEXPLORED")));
-    dfs.addVertex(Edge six(std::pair<double, double>(-0.34, 0.5), "UNEXPLORED")));
-    dfs.addVertex(Edge seven(std::pair<double, double>(-0.13, 0.5), "UNEXPLORED")));
+    dfs.addVertex(Graph::Edge one(std::pair<double, double> (-0.33, 0.5), "UNEXPLORED"));
+    dfs.addVertex(Graph::Edge two(std::pair<double, double>(0.33, 0.5), "UNEXPLORED")));
+    dfs.addVertex(Graph::Edge three(std::pair<double, double>(0.33, -0.5), "UNEXPLORED")));
+    dfs.addVertex(Graph::Edge four(std::pair<double, double>(-0.33, -0.5), "UNEXPLORED")));
+    dfs.addVertex(Graph::Edge five(std::pair<double, double>(-0.33, 0.7), "UNEXPLORED")));
+    dfs.addVertex(Graph::Edge six(std::pair<double, double>(-0.34, 0.5), "UNEXPLORED")));
+    dfs.addVertex(Graph::Edge seven(std::pair<double, double>(-0.13, 0.5), "UNEXPLORED")));
 
-    // Create edge list
-    Edge A(std::pair<double, double>(2, 41), "UNEXPLORED");
-    Edge B(std::pair<double, double>(4, 70), "UNEXPLORED");
-    Edge C(std::pair<double, double>(3, 61), "UNEXPLORED");
-    Edge D(std::pair<double, double>(1, 41), "UNEXPLORED");
-    Edge E(std::pair<double, double>(5, 71), "UNEXPLORED");
-    Edge F(std::pair<double, double>(2, 61), "UNEXPLORED");
-    Edge G(std::pair<double, double>(7, 22), "UNEXPLORED");
-    Edge H(std::pair<double, double>(6, 27), "UNEXPLORED");
-    Edge I(std::pair<double, double>(1, 40), "UNEXPLORED");
-    Edge J(std::pair<double, double>(5, 21), "UNEXPLORED");
-    Edge K(std::pair<double, double>(3, 39), "UNEXPLORED");
-    Edge L(std::pair<double, double>(5, 34), "UNEXPLORED");
+    // Create Graph::Edge list
+    Graph::Edge A(std::pair<double, double>(2, 41), "UNEXPLORED");
+    Graph::Edge B(std::pair<double, double>(4, 70), "UNEXPLORED");
+    Graph::Edge C(std::pair<double, double>(3, 61), "UNEXPLORED");
+    Graph::Edge D(std::pair<double, double>(1, 41), "UNEXPLORED");
+    Graph::Edge E(std::pair<double, double>(5, 71), "UNEXPLORED");
+    Graph::Edge F(std::pair<double, double>(2, 61), "UNEXPLORED");
+    Graph::Edge G(std::pair<double, double>(7, 22), "UNEXPLORED");
+    Graph::Edge H(std::pair<double, double>(6, 27), "UNEXPLORED");
+    Graph::Edge I(std::pair<double, double>(1, 40), "UNEXPLORED");
+    Graph::Edge J(std::pair<double, double>(5, 21), "UNEXPLORED");
+    Graph::Edge K(std::pair<double, double>(3, 39), "UNEXPLORED");
+    Graph::Edge L(std::pair<double, double>(5, 34), "UNEXPLORED");
 
-    dfs.addEdge(1, B);
-    dfs.addEdge(1, A);
-    dfs.addEdge(2, E);
-    dfs.addEdge(2, D);
-    dfs.addEdge(2, C);
-    dfs.addEdge(3, G);
-    dfs.addEdge(3, F);
-    dfs.addEdge(4, H);
-    dfs.addEdge(6, K);
-    dfs.addEdge(6, J);
-    dfs.addEdge(6, I);
-    dfs.addEdge(7, L);
+    dfs.addGraph::Edge(1, B);
+    dfs.addGraph::Edge(1, A);
+    dfs.addGraph::Edge(2, E);
+    dfs.addGraph::Edge(2, D);
+    dfs.addGraph::Edge(2, C);
+    dfs.addGraph::Edge(3, G);
+    dfs.addGraph::Edge(3, F);
+    dfs.addGraph::Edge(4, H);
+    dfs.addGraph::Edge(6, K);
+    dfs.addGraph::Edge(6, J);
+    dfs.addGraph::Edge(6, I);
+    dfs.addGraph::Edge(7, L);
 
     // Call function to perform DFS
     print(png, dfs, 1);
@@ -98,7 +96,7 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
     REQUIRE(six.label == "VISITED");
     REQUIRE(seven.label == "VISITED");
 
-    // Starting at Vertex one, specific edges will either "DISCOVERY" or "BACK"
+    // Starting at Vertex one, specific Graph::Edges will either "DISCOVERY" or "BACK"
     REQUIRE(A.label == "DISCOVERY");
     REQUIRE(B.label == "DISCOVERY");
     REQUIRE(C.label == "DISCOVERY");
@@ -125,3 +123,5 @@ TEST_CASE("print() Starting Airport as O'Hare", "[weight=0][part=3]") {
 
 }
 
+
+}
