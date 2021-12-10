@@ -67,9 +67,10 @@ Point Graph::createPoint(double lat, double lon) {
     if (lon > 0) {
         x = map.width() - x;
     }
+    x = floor(x);
+    y = floor(y);
 
     Point p(x, y);
-
     return p;
 }
 

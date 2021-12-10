@@ -13,3 +13,4 @@ Thanksgiving Break
 Worked out the details for the new project idea, completed and submitted the new proposal.  Set up the files for the project and started writing code for each file.
 
 ## Dec 6th - Dec 13th
+Dec 9th - Completing Dijkstra's algorithm and Parsing the csv. Writing test cases print-graph

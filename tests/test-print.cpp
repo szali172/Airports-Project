@@ -15,6 +15,16 @@
 using namespace cs225;
 
 
+TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
+  Graph g();
+  g.map.readFromFile("base_map.png");
+  REQUIRE(g.createPoint(10, 67.34) == Point(3435, 1111));
+  REQUIRE(g.createPoint(-45.33, -10) == Point(1870, 1388));
+  REQUIRE(g.createPoint(90, 180) == Point(5000, 0)); // Top-Right Corner
+  REQUIRE(g.createPoint(-90, -180) == Point(0, 2500)); // Bottom-Left Corner
+  REQUIRE(g.createPoint(0, 0) == Point(2500, 1250)); // Center
+}
+
 /**
 * Construct a mini graph to test DFS traversal
 
@@ -115,8 +125,6 @@ Graph g("airports.csv", "routes.csv");
 TEST_CASE("print() Starting Airport as O'Hare", "[weight=0][part=3]") {
   g.setStart(locateStart("ORD"));
   Graph ord = dijkstra(g, g.getStart());
-
-
 
 }
 
