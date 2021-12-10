@@ -60,6 +60,10 @@ class Graph {
 // graph-parse.cpp
     Graph(std::string airports_file, std::string routes_file);
 
+    void airportParse(std::string airports_file);
+    void routeParse(std::string routes_file);
+
+
 // print-graph.cpp
     /**
     * Prints all the airports and routes onto a PNG
