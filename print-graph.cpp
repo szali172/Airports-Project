@@ -10,7 +10,7 @@ void Graph::print() {
     Graph* SSSP = dijkstra(this, start);
     PNG* output = new PNG(map); // Create a copy map to draw on
 
-    for (int vertex = 1; vertex < adjacency_list.size(); vertex++) {
+    for (unsigned vertex = 1; vertex < adjacency_list.size(); vertex++) {
         if (adjacency_list[vertex]->label == "UNEXPLORED") {
             print(output, *SSSP, vertex);
         }
@@ -25,7 +25,7 @@ void Graph::print() {
 */
 void Graph::print(PNG* output, Graph& graph, int vertex) {
     graph.adjacency_list[vertex]->label = "VISITED";
-    Point src = createPoint(graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
+    Graph::Point src = createPoint(graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
     printVertex(output, src);
 
     Edge* curr = graph.adjacency_list[vertex]; // curr == head
@@ -35,7 +35,7 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
     while (curr) {
         if (graph.adjacency_list[curr->data.first]->label == "UNEXPLORED") {
             curr->label = "DISCOVERY";
-            Point dest = createPoint(graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
+            Graph::Point dest = createPoint(graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
             printEdge(output, src, dest);
             // Recursive call
             print(output, graph, curr->data.first);
@@ -51,10 +51,10 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
 
 
 /**
-* Creates an (x, y) point with a given latitude and longitude coordinate
+* Creates an (x, y) Graph::Point with a given latitude and longitude coordinate
 * @param lat latitude
 * @param lon longitude
-* @return 2D point (x, y) that represents the latitude and longitude on the map
+* @return 2D Graph::Point (x, y) that represents the latitude and longitude on the map
 */
 Graph::Point Graph::createPoint(double lat, double lon) {
     int x = (int)((map.width()/2) - ((map.width()/2)/180) * abs(lon));
@@ -71,7 +71,7 @@ Graph::Point Graph::createPoint(double lat, double lon) {
     x = floor(x);
     y = floor(y);
 
-    Point p{x, y};
+    Graph::Point p(x, y);
     return p;
 }
 
@@ -82,7 +82,7 @@ Graph::Point Graph::createPoint(double lat, double lon) {
 * @param map PNG to draw on
 * @param airport (x, y) coordinate for the airport
 */
-void Graph::printVertex(PNG* map, Point airport) {
+void Graph::printVertex(PNG* map, Graph::Point airport) {
     HSLAPixel pixel;
     pixel.h = 2;
     pixel.s = 0.8;
@@ -113,7 +113,7 @@ void Graph::printVertex(PNG* map, Point airport) {
 * @param src source airport
 * @param dest destination airport
 */
-void Graph::printEdge(PNG* map, Point src, Point dest) {
+void Graph::printEdge(PNG* map, Graph::Point src, Graph::Point dest) {
     // Either 0, 1, or -1
     // 0 = still value, 1 = incrementing, -1 = decrementing
     int xMove, yMove = 0;

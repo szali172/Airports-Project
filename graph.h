@@ -9,9 +9,10 @@
 #include <vector>
 #include <stack>
 #include <list>
+#include <cmath>
 
 using namespace cs225;
-
+namespace Graph {
 class Graph {
     public:
     /**
@@ -36,6 +37,13 @@ class Graph {
     struct Point {
         int x;
         int y;
+        Point(int x_, int y_) {
+            x = x_;
+            y = y_;
+        }
+        bool operator==(Point other) const {
+            return this->x == other.x && this->y == other.y;
+        }
     };
 
     /**
@@ -75,8 +83,16 @@ class Graph {
     * Calls dikstra() and prints the graph returned
     * Perform DFS to traverse the SSSP
     */
-
     void print();
+
+    /**
+    * Creates an (x, y) point with a given latitude and longitude coordinate
+    * @param lat latitude
+    * @param lon longitude
+    * @return 2D point (x, y) that represents the latitude and longitude on the map
+    */
+    Point createPoint(double lat, double lon);
+
 
 // dijkstra.cpp
     /**
@@ -117,13 +133,6 @@ class Graph {
     void setStart(int index);
 
 // print-graph.cpp helper functions
-    /**
-    * Creates an (x, y) point with a given latitude and longitude coordinate
-    * @param lat latitude
-    * @param lon longitude
-    * @return 2D point (x, y) that represents the latitude and longitude on the map
-    */
-    Point createPoint(double lat, double lon);
     
     /**
     * Helper function to perform DFS
@@ -150,3 +159,4 @@ class Graph {
     */
     void printEdge(PNG* map, Point src, Point dest);
 };
+}

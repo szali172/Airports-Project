@@ -5,18 +5,16 @@
 #include <string>
 #include <vector>
 
+#include "../graph.h"
 #include "../cs225/PNG.h"
 #include "../cs225/HSLAPixel.h"
 
-#include "graph.h"
-
-
 using namespace cs225;
+using namespace Graph;
 
 
 TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
-  Graph g{};
-  g.map.readFromFile("base_map.png");
+  Graph g;
   REQUIRE(g.createPoint(10, 67.34) == Point(3435, 1111));
   REQUIRE(g.createPoint(-45.33, -10) == Point(1870, 1388));
   REQUIRE(g.createPoint(90, 180) == Point(5000, 0)); // Top-Right Corner
@@ -48,8 +46,8 @@ TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
 * [7, "VISITED"] -> L[<5, 34>, "DISCOVERY"]
 */
 TEST_CASE("DFS traversal", "[weight=0][part=3]") {
-    Graph dfs{};
-    PNG png(); // Blank PNG to pass into DFS function, Will not be edited or returned
+    Graph dfs;
+    PNG png; // Blank PNG to pass into DFS function, Will not be edited or returned
 
     // Create vertex list
     dfs.addVertex(NULL);
