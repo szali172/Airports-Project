@@ -1,7 +1,8 @@
 #include "graph.h"
+#include <cmath>
 
-/*
-* Prints all the airports and routes onto a PNG
+/**
+* @brief Prints all the airports and routes onto a PNG
 * Calls dikstra() and prints the graph returned
 * Perform DFS to traverse the SSSP
 */
@@ -16,6 +17,33 @@ PNG Graph::print() const {
     }
     return output;
 }
+
+
+/**
+* Creates an (x, y) Graph::Point with a given latitude and longitude coordinate
+* @param lat latitude
+* @param lon longitude
+* @return 2D Graph::Point (x, y) that represents the latitude and longitude on the map
+*/
+static Graph::Point Graph::createPoint(double lat, double lon) {
+    int x = (int)((map.width()/2) - ((map.width()/2)/180) * abs(lon));
+    int y = (int)((map.height()/2) - ((map.height()/2)/90) * abs(lat));
+
+    // If latitude is negative
+    if (lat < 0) {
+        y = map.height() - y;
+    }
+    // If longitude is positive
+    if (lon > 0) {
+        x = map.width() - x;
+    }
+    x = floor(x);
+    y = floor(y);
+
+    Graph::Point p(x, y);
+    return p;
+}
+
 
 /**
 * Helper function to perform DFS
@@ -51,32 +79,6 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
 
 
 /**
-* Creates an (x, y) Graph::Point with a given latitude and longitude coordinate
-* @param lat latitude
-* @param lon longitude
-* @return 2D Graph::Point (x, y) that represents the latitude and longitude on the map
-*/
-static Graph::Point Graph::createPoint(double lat, double lon) {
-    int x = (int)((map.width()/2) - ((map.width()/2)/180) * abs(lon));
-    int y = (int)((map.height()/2) - ((map.height()/2)/90) * abs(lat));
-
-    // If latitude is negative
-    if (lat < 0) {
-        y = map.height() - y;
-    }
-    // If longitude is positive
-    if (lon > 0) {
-        x = map.width() - x;
-    }
-    x = floor(x);
-    y = floor(y);
-
-    Graph::Point p(x, y);
-    return p;
-}
-
-
-/**
 * Helper function for print()
 * prints a red dot on the map to represent the passed airport
 * @param map PNG to draw on
@@ -105,6 +107,7 @@ void Graph::printVertex(PNG* map, Graph::Point airport) {
     map->getPixel(x, y - 2) = pixel;
     map->getPixel(x, y + 2) = pixel;
 }
+
 
 /**
 * Helper function for print()
