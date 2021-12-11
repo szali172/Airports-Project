@@ -1,7 +1,7 @@
 #pragma once
 
-#include "cs225/PNG.h"
-#include "cs225/HSLAPixel.h"
+#include "PNG.h"
+#include "HSLAPixel.h"
 
 #include <iostream>
 #include <string>
@@ -117,7 +117,7 @@ class Graph {
     * @param starting node
     * @return SSSP graph
     */
-    Graph* dijkstra(Graph* graph, int start);
+    Graph dijkstra(Graph* graph, int start);
 
     double calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 

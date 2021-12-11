@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "../include/graph.h"
 #include <list>
 #include <cmath>
 #include <math.h>
@@ -43,7 +43,7 @@ int locateStart(std::string airports_file, std::string start) {
 * @param starting node
 * @return SSSP graph
 */
-Graph* Graph::dijkstra(Graph* graph, int start) {   //TODO finish up this function and add useful comments
+Graph Graph::dijkstra(Graph* graph, int start) {   //TODO finish up this function and add useful comments
     /*
     for (Vertex v : graph) {
         dist[v] = +inf;
@@ -71,7 +71,7 @@ Graph* Graph::dijkstra(Graph* graph, int start) {   //TODO finish up this functi
         }
     }
     */
-   return nullptr;
+   return *graph;
 }
 
 
