@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "../include/graph.h"
 
 /**
 * @brief Constructs the Vertex list, but not the Edges

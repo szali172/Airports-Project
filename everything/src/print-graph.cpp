@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "../include/graph.h"
 #include <cmath>
 
 /**
@@ -7,12 +7,13 @@
 * Perform DFS to traverse the SSSP
 */
 PNG Graph::print() const {
-    Graph* SSSP = dijkstra(this, start);
-    PNG output = new PNG(map); // Create a copy map to draw on
+    /// start = 0
+    Graph SSSP = dijkstra(this, start);
+    PNG* output = new PNG(map); // Create a copy map to draw on
 
     for (unsigned vertex = 1; vertex < adjacency_list.size(); vertex++) {
         if (adjacency_list[vertex]->label == "UNEXPLORED") {
-            print(output, *SSSP, vertex);
+            print(output, SSSP, vertex);
         }
     }
     return output;

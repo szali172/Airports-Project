@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "../include/graph.h"
 #include <list>
 #include <cmath>
 #include <math.h>

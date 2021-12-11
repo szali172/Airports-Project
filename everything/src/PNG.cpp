@@ -19,9 +19,9 @@ using std::vector;
 #include <algorithm>
 #include <functional>
 
-#include "lodepng/lodepng.h"
-#include "PNG.h"
-#include "RGB_HSL.h"
+#include "../include/lodepng.h"
+#include "../include/PNG.h"
+#include "../include/RGB_HSL.h"
 
 
 namespace cs225 {
