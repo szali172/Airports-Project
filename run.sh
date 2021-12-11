@@ -4,6 +4,6 @@
 
 ./test.sh
 
-cd src
-./main "$@"
-cd ..
+# cd src
+# ./main "$@"
+# cd ..
