@@ -47,17 +47,25 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
     Graph dfs;
     PNG png; // Blank PNG to pass into DFS function, Will not be edited or returned
 
+    Graph::Edge one(std::pair<double, double>(-0.33, 0.5), "UNEXPLORED");
+    Graph::Edge two(std::pair<double, double>(0.33, 0.5), "UNEXPLORED");
+    Graph::Edge three(std::pair<double, double>(0.33, -0.5), "UNEXPLORED");
+    Graph::Edge four(std::pair<double, double>(-0.33, -0.5), "UNEXPLORED");
+    Graph::Edge five(std::pair<double, double>(-0.33, 0.7), "UNEXPLORED");
+    Graph::Edge six(std::pair<double, double>(-0.34, 0.5), "UNEXPLORED");
+    Graph::Edge seven(std::pair<double, double>(-0.13, 0.5), "UNEXPLORED");
+
     // Create vertex list
     dfs.addVertex(NULL);
-    dfs.addVertex(Graph::Edge one(std::pair<double, double> (-0.33, 0.5), "UNEXPLORED"));
-    dfs.addVertex(Graph::Edge two(std::pair<double, double>(0.33, 0.5), "UNEXPLORED")));
-    dfs.addVertex(Graph::Edge three(std::pair<double, double>(0.33, -0.5), "UNEXPLORED")));
-    dfs.addVertex(Graph::Edge four(std::pair<double, double>(-0.33, -0.5), "UNEXPLORED")));
-    dfs.addVertex(Graph::Edge five(std::pair<double, double>(-0.33, 0.7), "UNEXPLORED")));
-    dfs.addVertex(Graph::Edge six(std::pair<double, double>(-0.34, 0.5), "UNEXPLORED")));
-    dfs.addVertex(Graph::Edge seven(std::pair<double, double>(-0.13, 0.5), "UNEXPLORED")));
+    dfs.addVertex(&one);
+    dfs.addVertex(&two);
+    dfs.addVertex(&three);
+    dfs.addVertex(&four);
+    dfs.addVertex(&five);
+    dfs.addVertex(&six);
+    dfs.addVertex(&seven);
 
-    // Create Graph::Edge list
+    // Create edge list
     Graph::Edge A(std::pair<double, double>(2, 41), "UNEXPLORED");
     Graph::Edge B(std::pair<double, double>(4, 70), "UNEXPLORED");
     Graph::Edge C(std::pair<double, double>(3, 61), "UNEXPLORED");
@@ -71,21 +79,21 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
     Graph::Edge K(std::pair<double, double>(3, 39), "UNEXPLORED");
     Graph::Edge L(std::pair<double, double>(5, 34), "UNEXPLORED");
 
-    dfs.addGraph::Edge(1, B);
-    dfs.addGraph::Edge(1, A);
-    dfs.addGraph::Edge(2, E);
-    dfs.addGraph::Edge(2, D);
-    dfs.addGraph::Edge(2, C);
-    dfs.addGraph::Edge(3, G);
-    dfs.addGraph::Edge(3, F);
-    dfs.addGraph::Edge(4, H);
-    dfs.addGraph::Edge(6, K);
-    dfs.addGraph::Edge(6, J);
-    dfs.addGraph::Edge(6, I);
-    dfs.addGraph::Edge(7, L);
+    dfs.addEdge(1, &B);
+    dfs.addEdge(1, &A);
+    dfs.addEdge(2, &E);
+    dfs.addEdge(2, &D);
+    dfs.addEdge(2, &C);
+    dfs.addEdge(3, &G);
+    dfs.addEdge(3, &F);
+    dfs.addEdge(4, &H);
+    dfs.addEdge(6, &K);
+    dfs.addEdge(6, &J);
+    dfs.addEdge(6, &I);
+    dfs.addEdge(7, &L);
 
     // Call function to perform DFS
-    print(png, dfs, 1);
+    //TODO print(png, dfs, 1);
 
     // Make sure all vertices have been visited
     REQUIRE(one.label == "VISITED");
@@ -118,10 +126,7 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
 Graph g("airports.csv", "routes.csv");
 
 TEST_CASE("print() Starting Airport as O'Hare", "[weight=0][part=3]") {
-  g.setStart(locateStart("ORD"));
-  Graph ord = dijkstra(g, g.getStart());
-
-}
-
+  //TODO g.setStart(locateStart("ORD"));
+  //TODO Graph ord = g.dijkstra(g, g.getStart());
 
 }

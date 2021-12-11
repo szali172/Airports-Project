@@ -12,7 +12,6 @@
 #include <cmath>
 
 using namespace cs225;
-
 class Graph {
     public:
     /**
