@@ -8,6 +8,7 @@
 * @param airports_file CSV file containing all the airports and their specific location in the world (latitude and longitude in 2d space)
 */
 Graph::Graph(std::string airports_file) {
+    map.readFromFile("base_map.png");
     airportParse(airports_file);
 }
 
@@ -22,6 +23,7 @@ Graph::Graph(std::string airports_file) {
 * @param routes_file CSV file containing all the possible routes between 2 different airports
 */
 Graph::Graph(std::string airports_file, std::string routes_file) {
+    map.readFromFile("base_map.png");
     airportParse(airports_file);
     routeParse(routes_file);
 }

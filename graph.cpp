@@ -4,6 +4,15 @@
 #include <math.h>
 
 /**
+* Constructs an empty graph
+* Both Vertex and Edge list will be empty
+*/
+Graph::Graph() {
+    map.readFromFile("base_map.png");
+}
+
+
+/**
  * @brief when user passes in starting airport
  * Parses through airports csv file until it finds a matching airport
  * Passed string could be an Airport name or IATA code
