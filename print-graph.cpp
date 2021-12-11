@@ -5,15 +5,16 @@
 * Calls dikstra() and prints the graph returned
 * Perform DFS to traverse the SSSP
 */
-void Graph::print() {
+PNG Graph::print() const {
     Graph* SSSP = dijkstra(this, start);
-    PNG* output = new PNG(map); // Create a copy map to draw on
+    PNG output = new PNG(map); // Create a copy map to draw on
 
     for (unsigned vertex = 1; vertex < adjacency_list.size(); vertex++) {
         if (adjacency_list[vertex]->label == "UNEXPLORED") {
             print(output, *SSSP, vertex);
         }
     }
+    return output;
 }
 
 /**
@@ -55,7 +56,7 @@ void Graph::print(PNG* output, Graph& graph, int vertex) {
 * @param lon longitude
 * @return 2D Graph::Point (x, y) that represents the latitude and longitude on the map
 */
-Graph::Point Graph::createPoint(double lat, double lon) {
+static Graph::Point Graph::createPoint(double lat, double lon) {
     int x = (int)((map.width()/2) - ((map.width()/2)/180) * abs(lon));
     int y = (int)((map.height()/2) - ((map.height()/2)/90) * abs(lat));
 

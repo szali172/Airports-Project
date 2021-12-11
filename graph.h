@@ -43,6 +43,7 @@ class Graph {
     struct Edge {
         std::pair<double, double> data;
         std::string label;
+        // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
         Edge* next;
         Edge(std::pair<double, double> data_, std::string label_) {
             data = data_;
@@ -86,15 +87,16 @@ class Graph {
     * Calls dikstra() and prints the graph returned
     * Perform DFS to traverse the SSSP
     */
-    void print();
+    PNG print() const;
 
     /**
     * Creates an (x, y) point with a given latitude and longitude coordinate
+    * Intended to be used in a static context
     * @param lat latitude
     * @param lon longitude
     * @return 2D point (x, y) that represents the latitude and longitude on the map
     */
-    Point createPoint(double lat, double lon);
+    static Point createPoint(double lat, double lon);
 
 
 // dijkstra.cpp
@@ -124,16 +126,16 @@ class Graph {
     */
     int getStart();
 
-    private:
-    PNG map;
-    std::vector<Edge*> adjacency_list;
-    int start; // Starting airport
-    //std::list<Edge*> adjacency_list[];
-
     /**
     * Setter for private member start
     */
     void setStart(int index);
+
+    std::vector<Edge*> adjacency_list;
+
+    private:
+    PNG map;
+    int start; // Starting airport
 
 // print-graph.cpp helper functions
     

@@ -13,11 +13,11 @@ using namespace cs225;
 
 TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
   Graph g;
-  REQUIRE(g.createPoint(10, 67.34) == Graph::Point(3435, 1111));
-  REQUIRE(g.createPoint(-45.33, -10) == Graph::Point(1870, 1388));
-  REQUIRE(g.createPoint(90, 180) == Graph::Point(5000, 0)); // Top-Right Corner
-  REQUIRE(g.createPoint(-90, -180) == Graph::Point(0, 2500)); // Bottom-Left Corner
-  REQUIRE(g.createPoint(0, 0) == Graph::Point(2500, 1250)); // Center
+  REQUIRE(Graph::createPoint(10, 67.34) == Graph::Point(3435, 1111));
+  REQUIRE(Graph::createPoint(-45.33, -10) == Graph::Point(1870, 1388));
+  REQUIRE(Graph::createPoint(90, 180) == Graph::Point(5000, 0)); // Top-Right Corner
+  REQUIRE(Graph::createPoint(-90, -180) == Graph::Point(0, 2500)); // Bottom-Left Corner
+  REQUIRE(Graph::createPoint(0, 0) == Graph::Point(2500, 1250)); // Center
 }
 
 /**
@@ -46,7 +46,6 @@ TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
 TEST_CASE("DFS traversal", "[weight=0][part=3]") {
     Graph dfs;
     PNG png; // Blank PNG to pass into DFS function, Will not be edited or returned
-
     Graph::Edge one(std::pair<double, double>(-0.33, 0.5), "UNEXPLORED");
     Graph::Edge two(std::pair<double, double>(0.33, 0.5), "UNEXPLORED");
     Graph::Edge three(std::pair<double, double>(0.33, -0.5), "UNEXPLORED");
@@ -126,7 +125,20 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
 Graph g("airports.csv", "routes.csv");
 
 TEST_CASE("print() Starting Airport as O'Hare", "[weight=0][part=3]") {
-  //TODO g.setStart(locateStart("ORD"));
-  //TODO Graph ord = g.dijkstra(g, g.getStart());
+  Graph* graph = &g;
+  graph->setStart(graph->locateStart("airports.csv", "ORD"));
+  Graph ord = graph->dijkstra(graph, graph->getStart());
+  PNG output = g.print();
 
+  HSLAPixel red;
+  red.h = 2;
+  red.s = 0.8;
+  red.l = 0.47;
+  red.a = 0.8;
+
+  for (unsigned i = 1; i < ord.adjacency_list.size(); i++) {
+
+    Graph::Point p = Graph::createPoint(ord.adjacency_list[i]->data.first, ord.adjacency_list[i]->data.second);
+    REQUIRE(output.getPixel(p.x, p.y) == red);
+  }
 }

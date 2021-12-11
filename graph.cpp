@@ -37,6 +37,7 @@ int locateStart(std::string airports_file, std::string start) {
 */
 // graph = adjacency_list after all airports and all neighbors have been added
 Graph* Graph::dijkstra(Graph* graph, int start) {
+    std::cout << graph << start << std::endl;
     /*
     for (Vertex v : graph) {
         dist[v] = +inf;
