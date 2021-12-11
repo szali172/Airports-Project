@@ -10,7 +10,7 @@ Decided to no longer use the original project idea and came up an entirely new o
 Thanksgiving Break
 
 ## Nov 29th - Dec 3rd
-Worked out the details for the new project idea, completed and submitted the new proposal.  Set up the files for the project and started writing code for each file.
+Worked out the details for the new project idea, completed and submitted the new proposal.  Set up the files for the project and started writing code for each file (specifically hashing out the graph function and adding classes for the algorithms and parshing methods we will be using, specifically for the Graph and Dijkstra class, along with hashing out very basic test cases).
 
 ## Dec 6th - Dec 13th
-Dec 9th - Completing Dijkstra's algorithm and Parsing the csv. Writing test cases print-graph
+Dec 9th - Completing Dijkstra's algorithm and Parsing the csv. Writing test cases (specifically for print-graph), cleaned up code format (added comments and removed any unecessary code), created a Doxygen file and updated ReadMe for final presentation/project, and recorded presentation
