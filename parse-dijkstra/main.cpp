@@ -1,4 +1,6 @@
 
+#include "../parse-dijkstra/include/graph.h"
+
 #include <iostream>
 
 

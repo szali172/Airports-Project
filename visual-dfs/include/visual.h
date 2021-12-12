@@ -14,9 +14,6 @@ namespace Visual {
             x = x_;
             y = y_;
         }
-        bool operator==(Point other) const {
-            return this->x == other.x && this->y == other.y;
-        }
     };
 
     /**

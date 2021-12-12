@@ -1,16 +1,18 @@
 // #include "include/adder.h"
 #include <iostream>
+#include <unistd.h>
+#include <stdio.h>
 
-// using Parser::Node;
 
 int main() {
-    // Node n("5");
-    // Node n2("6");
+    
+    char buff[1000];
+    getcwd( buff, 1000 );
+    std::string cwd( buff );
+    std::cout << "cwd: " << cwd << std::endl;
 
-    // Adder::Adder a(n, n2);
-
-    // std::cout << a.getResult() << std::endl;
-    // std::cout << Node::num_nodes_ << std::endl;
+    FILE* file = fopen("../data/base_map.png", "rb");
+    std::cout << file << std::endl;
 
     return 0;
 }
