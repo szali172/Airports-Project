@@ -170,6 +170,84 @@ ParsingLib/fast:
 .PHONY : ParsingLib/fast
 
 #=============================================================================
+# Target rules for targets named main-parse-dijkstra
+
+# Build rule for target.
+main-parse-dijkstra: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main-parse-dijkstra
+.PHONY : main-parse-dijkstra
+
+# fast build rule for target.
+main-parse-dijkstra/fast:
+	$(MAKE) $(MAKESILENT) -f parse-dijkstra/CMakeFiles/main-parse-dijkstra.dir/build.make parse-dijkstra/CMakeFiles/main-parse-dijkstra.dir/build
+.PHONY : main-parse-dijkstra/fast
+
+#=============================================================================
+# Target rules for targets named test-parse-dijkstra
+
+# Build rule for target.
+test-parse-dijkstra: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-parse-dijkstra
+.PHONY : test-parse-dijkstra
+
+# fast build rule for target.
+test-parse-dijkstra/fast:
+	$(MAKE) $(MAKESILENT) -f parse-dijkstra/CMakeFiles/test-parse-dijkstra.dir/build.make parse-dijkstra/CMakeFiles/test-parse-dijkstra.dir/build
+.PHONY : test-parse-dijkstra/fast
+
+#=============================================================================
+# Target rules for targets named Parse-DijkstraLib
+
+# Build rule for target.
+Parse-DijkstraLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Parse-DijkstraLib
+.PHONY : Parse-DijkstraLib
+
+# fast build rule for target.
+Parse-DijkstraLib/fast:
+	$(MAKE) $(MAKESILENT) -f parse-dijkstra/CMakeFiles/Parse-DijkstraLib.dir/build.make parse-dijkstra/CMakeFiles/Parse-DijkstraLib.dir/build
+.PHONY : Parse-DijkstraLib/fast
+
+#=============================================================================
+# Target rules for targets named test-visual-dfs
+
+# Build rule for target.
+test-visual-dfs: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test-visual-dfs
+.PHONY : test-visual-dfs
+
+# fast build rule for target.
+test-visual-dfs/fast:
+	$(MAKE) $(MAKESILENT) -f visual-dfs/CMakeFiles/test-visual-dfs.dir/build.make visual-dfs/CMakeFiles/test-visual-dfs.dir/build
+.PHONY : test-visual-dfs/fast
+
+#=============================================================================
+# Target rules for targets named main-visual-dfs
+
+# Build rule for target.
+main-visual-dfs: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main-visual-dfs
+.PHONY : main-visual-dfs
+
+# fast build rule for target.
+main-visual-dfs/fast:
+	$(MAKE) $(MAKESILENT) -f visual-dfs/CMakeFiles/main-visual-dfs.dir/build.make visual-dfs/CMakeFiles/main-visual-dfs.dir/build
+.PHONY : main-visual-dfs/fast
+
+#=============================================================================
+# Target rules for targets named Visual-DFSLib
+
+# Build rule for target.
+Visual-DFSLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Visual-DFSLib
+.PHONY : Visual-DFSLib
+
+# fast build rule for target.
+Visual-DFSLib/fast:
+	$(MAKE) $(MAKESILENT) -f visual-dfs/CMakeFiles/Visual-DFSLib.dir/build.make visual-dfs/CMakeFiles/Visual-DFSLib.dir/build
+.PHONY : Visual-DFSLib/fast
+
+#=============================================================================
 # Target rules for targets named main
 
 # Build rule for target.
@@ -204,10 +282,16 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MainLib"
+	@echo "... Parse-DijkstraLib"
 	@echo "... ParsingLib"
+	@echo "... Visual-DFSLib"
 	@echo "... main"
+	@echo "... main-parse-dijkstra"
 	@echo "... main-parsing"
+	@echo "... main-visual-dfs"
+	@echo "... test-parse-dijkstra"
 	@echo "... test-parsing"
+	@echo "... test-visual-dfs"
 .PHONY : help
 
 

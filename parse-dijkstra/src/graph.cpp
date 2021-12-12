@@ -7,9 +7,7 @@
 * Constructs an empty graph
 * Both Vertex and Edge list will be empty
 */
-Graph::Graph() {
-    map.readFromFile("base_map.png");
-}
+Graph::Graph() {}
 
 
 /**
@@ -24,7 +22,7 @@ Graph::Graph() {
 int locateStart(std::string airports_file, std::string start) {
     std::ifstream fs(airports_file);    //get airport csv file into the ifstream to be parsed
 
-    string currLine;
+    std::string currLine;
     while(std::getline(fs, currLine)) { //goes through every line in the csv file to find the starting airport (start param)
         if (currLine.find(start, 0) != std::string::npos) {
             int airportID = std::stoi(currLine.substr(0, currLine.find(',')));
@@ -136,5 +134,5 @@ void Graph::addVertex(Edge* vertex) {
 }
 
 void Graph::setStart(int index) {
-    start = index;
+    start_ = index;
 }

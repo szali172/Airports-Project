@@ -4,13 +4,15 @@
 
 TEST_PARSING="test-parsing"
 TEST_ADDER="test-adder"
+TEST_DIJKSTRA="test-parse-dikstra"
+TEST_VISUAL="test-visual-dfs"
 
-echo "Testing Parsing"
-cd parsing/
-./$TEST_PARSING
+echo "Testing Dijkstra"
+cd parse-dijstra/
+./$TEST_DIJKSTRA
 cd ..
 
-echo "Testing Adder"
-cd adder/
-./$TEST_ADDER
+echo "Testing Visual"
+cd visual-dfs/
+./$TEST_VISUAL
 cd ..

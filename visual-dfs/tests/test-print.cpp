@@ -1,23 +1,27 @@
-#include "../cs225/catch/catch.hpp"
+#define CATCH_CONFIG_MAIN  
+#include "catch2/catch.hpp"
+
+// https://github.com/catchorg/Catch2/blob/devel/docs/own-main.md#top
 
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include "../graph.h"
-#include "../cs225/PNG.h"
-#include "../cs225/HSLAPixel.h"
+#include "graph.h"
+#include "../include/PNG.h"
+#include "../include/HSLAPixel.h"
+#inlcude "visual.h"
 
 using namespace cs225;
 
 TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
   Graph g;
-  REQUIRE(Graph::createPoint(10, 67.34) == Graph::Point(3435, 1111));
-  REQUIRE(Graph::createPoint(-45.33, -10) == Graph::Point(1870, 1388));
-  REQUIRE(Graph::createPoint(90, 180) == Graph::Point(5000, 0)); // Top-Right Corner
-  REQUIRE(Graph::createPoint(-90, -180) == Graph::Point(0, 2500)); // Bottom-Left Corner
-  REQUIRE(Graph::createPoint(0, 0) == Graph::Point(2500, 1250)); // Center
+  REQUIRE(Visual::createPoint(10, 67.34) == Visual::Point(3435, 1111));
+  REQUIRE(Visual::createPoint(-45.33, -10) == Visual::Point(1870, 1388));
+  REQUIRE(Visual::createPoint(90, 180) == Visual::Point(5000, 0)); // Top-Right Corner
+  REQUIRE(Visual::createPoint(-90, -180) == Visual::Point(0, 2500)); // Bottom-Left Corner
+  REQUIRE(Visual::createPoint(0, 0) == Visual::Point(2500, 1250)); // Center
 }
 
 /**
@@ -138,7 +142,7 @@ TEST_CASE("print() Starting Airport as O'Hare", "[weight=0][part=3]") {
 
   for (unsigned i = 1; i < ord.adjacency_list.size(); i++) {
 
-    Graph::Point p = Graph::createPoint(ord.adjacency_list[i]->data.first, ord.adjacency_list[i]->data.second);
+    Visual::Point p = Visual::createPoint(ord.adjacency_list[i]->data.first, ord.adjacency_list[i]->data.second);
     REQUIRE(output.getPixel(p.x, p.y) == red);
   }
 }

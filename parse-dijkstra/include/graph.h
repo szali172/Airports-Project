@@ -1,17 +1,14 @@
 #pragma once
 
-#include "PNG.h"
-#include "HSLAPixel.h"
-
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <stack>
-#include <list>
 #include <cmath>
 
-using namespace cs225;
+
 class Graph {
     public:
     /**
@@ -51,17 +48,6 @@ class Graph {
         }
     };
 
-    struct Point {
-        int x;
-        int y;
-        Point(int x_, int y_) {
-            x = x_;
-            y = y_;
-        }
-        bool operator==(Point other) const {
-            return this->x == other.x && this->y == other.y;
-        }
-    };
 
     /**
     * Adds an edge to a Graph
@@ -80,23 +66,6 @@ class Graph {
 // graph-parse.cpp
     void airportParse(std::string airports_file);
     void routeParse(std::string routes_file);
-
-// print-graph.cpp
-    /**
-    * Prints all the airports and routes onto a PNG
-    * Calls dikstra() and prints the graph returned
-    * Perform DFS to traverse the SSSP
-    */
-    PNG print() const;
-
-    /**
-    * Creates an (x, y) point with a given latitude and longitude coordinate
-    * Intended to be used in a static context
-    * @param lat latitude
-    * @param lon longitude
-    * @return 2D point (x, y) that represents the latitude and longitude on the map
-    */
-    static Point createPoint(double lat, double lon);
 
 
 // dijkstra.cpp
@@ -134,33 +103,6 @@ class Graph {
     std::vector<Edge*> adjacency_list;
 
     private:
-    PNG map;
-    int start; // Starting airport
+    int start_; // Starting airport
 
-// print-graph.cpp helper functions
-    
-    /**
-    * Helper function to perform DFS
-    * @param output PNG map to draw on
-    * @param graph SSSP graph passed from Dijkstra's
-    * @param vertex index of the airport in the adjacency list
-    */
-    void print(PNG* output, Graph& graph, int vertex);
-
-    /**
-    * Helper function for print()
-    * prints a red dot on the map to represent the passed airport
-    * @param map PNG to draw on
-    * @param airport (x, y) coordinate for the airport
-    */
-    void printVertex(PNG* map, Point airport);
-
-    /**
-    * Helper function for print()
-    * prints only the edge from Airport A to B
-    * @param map PNG to draw on
-    * @param src source airport
-    * @param dest destination airport
-    */
-    void printEdge(PNG* map, Point src, Point dest);
 };

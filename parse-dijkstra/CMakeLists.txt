@@ -13,20 +13,20 @@ file(GLOB SOURCES "src/*.cpp")
 file(GLOB TEST_SOURCES "tests/*.cpp")
 
 # Add library interface for our files
-add_library(EverythingLib ${SOURCES} ${INCLUDES})
+add_library(Parse-DijkstraLib ${SOURCES} ${INCLUDES})
 
 # Link
-target_include_directories(EverythingLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} "../parsing/include")
+target_include_directories(Parse-DijkstraLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} "../parsing/include")
 
 # Link Parsing Library to the a-star one
 link_directories("../parsing")
-target_link_libraries(EverythingLib ParsingLib)
+target_link_libraries(Parse-DijkstraLib ParsingLib)
 
 # Add the executable
-add_executable(main-everything main.cpp)
-target_link_libraries(main-everything EverythingLib)
+add_executable(main-parse-dijkstra main.cpp)
+target_link_libraries(main-parse-dijkstra Parse-DijkstraLib)
 
-target_include_directories(main-everything PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(main-parse-dijkstra PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Add Catch2
 Include(FetchContent)
@@ -38,5 +38,5 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(Catch2)
-add_executable(test-everything ${SOURCES} ${TEST_SOURCES})
-target_link_libraries(test-everything EverythingLib Catch2::Catch2)
+add_executable(test-parse-dijkstra ${SOURCES} ${TEST_SOURCES})
+target_link_libraries(test-parse-dijkstra Parse-DijkstraLib Catch2::Catch2)
