@@ -39,7 +39,7 @@ int locateStart(std::string airports_file, std::string start) {
 / Dijkstra's algorithm to find the shortest path for a graph using adjacency list
 */
 // graph = adjacency_list after all airports and all neighbors have been added
-Graph* Graph::dijkstra(Graph* graph, int start) {
+Graph Graph::dijkstra(Graph graph, int start) {
     int inf = std::numeric_limits<int>::max();
     Graph::Edge* prev;
 

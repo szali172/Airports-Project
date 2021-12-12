@@ -127,7 +127,7 @@ class Graph {
     * @param starting node
     * @return SSSP graph
     */
-    Graph* dijkstra(Graph* graph, int start);
+    Graph dijkstra(Graph graph, int start);
 
     double calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
@@ -172,10 +172,10 @@ class Graph {
     // Queue helper functions
 
     // Replaces/edits an element in the queue
-    void replace(Edge* toReplace, Edge* toInsert);
+    std::priority_queue<Edge*, std::vector<Edge*>, EdgeComparator> replace(Edge* toReplace, Edge* toInsert);
 
     // Removes an element from the queue (replace() helper function...?)
-    void removeElement(Edge* element);
+    std::priority_queue<Edge*, std::vector<Edge*>, EdgeComparator> removeElement(Edge* element);
 
     std::vector<Edge*> adjacency_list;
     std::priority_queue<Edge*, std::vector<Edge*>, EdgeComparator> pq;
