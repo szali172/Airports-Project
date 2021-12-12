@@ -1,16 +1,7 @@
-#include "../include/graph.h"
+#include "graph.h"
 #include <list>
 #include <cmath>
 #include <math.h>
-
-/**
-* Constructs an empty graph
-* Both Vertex and Edge list will be empty
-*/
-Graph::Graph() {
-    map.readFromFile("base_map.png");
-}
-
 
 /**
  * @brief when user passes in starting airport
@@ -43,7 +34,7 @@ int locateStart(std::string airports_file, std::string start) {
 * @param starting node
 * @return SSSP graph
 */
-Graph Graph::dijkstra(Graph* graph, int start) {   //TODO finish up this function and add useful comments
+Graph* Graph::dijkstra(Graph* graph, int start) {   //TODO finish up this function and add useful comments
     /*
     for (Vertex v : graph) {
         dist[v] = +inf;
@@ -53,13 +44,11 @@ Graph Graph::dijkstra(Graph* graph, int start) {   //TODO finish up this functio
     PriorityQueue Q;
     Q.makeHeap(graph.vertices());
     Graph T;
-
     for (int i = 0; i < n; i++) {
         Vertex u = Q.removeMin();
         T.add(u);
         for (Vertex v : )
     }
-
     while(!Q.empty()) {
         Vertex u = Q.removeMin();
         T.add(u);
@@ -71,7 +60,7 @@ Graph Graph::dijkstra(Graph* graph, int start) {   //TODO finish up this functio
         }
     }
     */
-   return *graph;
+   return nullptr;
 }
 
 

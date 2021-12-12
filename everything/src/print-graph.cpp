@@ -1,4 +1,4 @@
-#include "../include/graph.h"
+#include "graph.h"
 #include <cmath>
 
 /**
@@ -6,17 +6,15 @@
 * Calls dikstra() and prints the graph returned
 * Perform DFS to traverse the SSSP
 */
-PNG Graph::print() const {
-    /// start = 0
-    Graph SSSP = dijkstra(this, start);
+void Graph::print() {
+    Graph* SSSP = dijkstra(this, start);
     PNG* output = new PNG(map); // Create a copy map to draw on
 
     for (unsigned vertex = 1; vertex < adjacency_list.size(); vertex++) {
         if (adjacency_list[vertex]->label == "UNEXPLORED") {
-            print(output, SSSP, vertex);
+            print(output, *SSSP, vertex);
         }
     }
-    return output;
 }
 
 
@@ -26,7 +24,7 @@ PNG Graph::print() const {
 * @param lon longitude
 * @return 2D Graph::Point (x, y) that represents the latitude and longitude on the map
 */
-static Graph::Point Graph::createPoint(double lat, double lon) {
+Graph::Point Graph::createPoint(double lat, double lon) {
     int x = (int)((map.width()/2) - ((map.width()/2)/180) * abs(lon));
     int y = (int)((map.height()/2) - ((map.height()/2)/90) * abs(lat));
 
