@@ -105,10 +105,11 @@ class Graph {
         */
         Graph(std::string airports_file, std::string routes_file);
 
+        std::vector<Edge*> adjacency_list;  // the adjacency list which contains the verticies and edges of the airports and their location relative to each other
+
 
     private:
-        std::vector<Edge*> adjacency_list;  // the adjacency list which contains the verticies and edges of the airports and their location relative to each other
-        int start; //the starting airport??? //TODO fix this definition - idk what this is
+        int start_; //the starting airport??? //TODO fix this definition - idk what this is
 
 
         //graph-parse.cpp
