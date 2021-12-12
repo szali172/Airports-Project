@@ -56,16 +56,20 @@ git clone https://github-dev.cs.illinois.edu/cs225-fa21/ai10-sali200-drugutt2-pr
 
 ## Instructions on how to build and run the executable
 
-To run the final_project, you need to first build the executable and ensure that the code compiles properly with the following command:
+First, you will need to build all the dependencies and the Makefile.
 
 ```
-make airports
+cmake3 .
+```
+Followed by
+```
+make
 ```
 
 Once it successfully compiles, you can then run the program and generate the visualizations with the command below:
 
 ```
-./airports [Airport Data Location] [Route Data Location] [Source Airport] [Destination Airport] [Image Location]
+src/main [Airport Data Location] [Route Data Location] [Source Airport] [Destination Airport] [Image Location]
 ```
 + `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at data/airports.csv
 + `Route Data Location` : The file location of the routes dataset. The data can be found at data/routes.csv
