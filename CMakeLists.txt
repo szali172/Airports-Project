@@ -18,7 +18,9 @@ endif()
 # https://stackoverflow.com/questions/43862273/cmake-c-include-relative-to-base-directory
 project(Airports VERSION 1.0)
 
-add_subdirectory(parsing)
+set(CMAKE_BUILD_TYPE Debug)
+
+# add_subdirectory(parsing)
 # add_subdirectory(adder)
 add_subdirectory(parse-dijkstra)
 add_subdirectory(visual-dfs)

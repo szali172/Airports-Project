@@ -7,21 +7,34 @@
 using cs225::PNG;
 namespace Visual {
 
-struct Point {
-    int x;
-    int y;
-    Point(int x_, int y_) {
-        x = x_;
-        y = y_;
-    }
-    bool operator==(Point other) const {
-        return this->x == other.x && this->y == other.y;
-    }
-};
+    struct Point {
+        int x;
+        int y;
+        Point(int x_, int y_) {
+            x = x_;
+            y = y_;
+        }
+        bool operator==(Point other) const {
+            return this->x == other.x && this->y == other.y;
+        }
+    };
 
-PNG map_;
+    /**
+    * @brief Prints all the airports and routes onto a PNG
+    * @param graph is the output from Dijkstra's
+    * Perform DFS to traverse the SSSP graph
+    */
+    PNG print(Graph& graph, PNG map);
 
-// Helper functions
+    /**
+    * Creates an (x, y) point with a given latitude and longitude coordinate
+    * Intended to be used in a static context
+    * @param lat latitude
+    * @param lon longitude
+    * @return 2D point (x, y) that represents the latitude and longitude on the map
+    */
+    Point createPoint(PNG* map, double lat, double lon);
+
     /**
     * Helper function to perform DFS
     * @param output PNG map to draw on
@@ -47,20 +60,4 @@ PNG map_;
     */
     void printEdge(PNG* map, Point src, Point dest);
 
-/**
-* @brief Prints all the airports and routes onto a PNG
-* @param graph is the output from Dijkstra's
-* Perform DFS to traverse the SSSP graph
-*/
-PNG print(Graph& graph);
-
-/**
-* Creates an (x, y) point with a given latitude and longitude coordinate
-* Intended to be used in a static context
-* @param lat latitude
-* @param lon longitude
-* @return 2D point (x, y) that represents the latitude and longitude on the map
-*/
-Point createPoint(double lat, double lon);
-
-}
+};

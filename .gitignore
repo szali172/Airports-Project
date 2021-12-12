@@ -6,7 +6,8 @@ CMakeFiles/
 Makefile
 parsing/
 adder/
-
+test-*
+main-*
 
 # Prerequisites
 *.d

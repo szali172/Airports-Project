@@ -16,12 +16,12 @@ file(GLOB TEST_SOURCES "tests/*.cpp")
 add_library(MainLib ${SOURCES} ${INCLUDES} main.cpp)
 
 # Link
-target_include_directories(MainLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} "../parsing/include") # append "../everything/include"
+target_include_directories(MainLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}) # append "../everything/include"
 
 # Link Parsing Library to the a-star one
-link_directories("../parsing")
-link_directories("../everything")
-target_link_libraries(MainLib ParsingLib) # append EverythingLib
+# link_directories("../parsing")
+# link_directories("../everything")
+# target_link_libraries(MainLib ParsingLib) # append EverythingLib
 
 # Add the executable
 add_executable(main main.cpp)

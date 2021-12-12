@@ -16,11 +16,11 @@ file(GLOB TEST_SOURCES "tests/*.cpp")
 add_library(Parse-DijkstraLib ${SOURCES} ${INCLUDES})
 
 # Link
-target_include_directories(Parse-DijkstraLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} "../parsing/include")
+target_include_directories(Parse-DijkstraLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Link Parsing Library to the a-star one
-link_directories("../parsing")
-target_link_libraries(Parse-DijkstraLib ParsingLib)
+# link_directories("../parsing")
+# target_link_libraries(Parse-DijkstraLib ParsingLib)
 
 # Add the executable
 add_executable(main-parse-dijkstra main.cpp)

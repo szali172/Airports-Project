@@ -1,7 +1,6 @@
- #include "../parsing/include/parser_header.h"
+
 #include <iostream>
 
-using Parser::Node;
 
 int main() {
     // Node n("5");

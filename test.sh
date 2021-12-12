@@ -4,11 +4,11 @@
 
 TEST_PARSING="test-parsing"
 TEST_ADDER="test-adder"
-TEST_DIJKSTRA="test-parse-dikstra"
+TEST_DIJKSTRA="test-parse-dijkstra"
 TEST_VISUAL="test-visual-dfs"
 
 echo "Testing Dijkstra"
-cd parse-dijstra/
+cd parse-dijkstra/
 ./$TEST_DIJKSTRA
 cd ..
 

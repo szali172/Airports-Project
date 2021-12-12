@@ -4,14 +4,16 @@
 using cs225::PNG;
 using cs225::HSLAPixel;
 // using Graph::Edge;
+using namespace Visual;
+
 
 /**
 * @brief Prints all the airports and routes onto a PNG
 * @param graph is the output from Dijkstra's
 * Perform DFS to traverse the SSSP graph
 */
-PNG Visual::print(Graph& graph) {
-    PNG* output = new PNG(map_); // Create a copy map to draw on
+PNG Visual::print(Graph& graph, PNG map) {
+    PNG* output = new PNG(map); // Create a copy map to draw on
 
     for (unsigned vertex = 1; vertex < graph.adjacency_list.size(); vertex++) {
         if (graph.adjacency_list[vertex]->label == "UNEXPLORED") {
@@ -28,17 +30,17 @@ PNG Visual::print(Graph& graph) {
 * @param lon longitude
 * @return 2D Point (x, y) that represents the latitude and longitude on the map
 */
-Visual::Point Visual::createPoint(double lat, double lon) {
-    int x = (int)((map_.width()/2) - ((map_.width()/2)/180) * abs(lon));
-    int y = (int)((map_.height()/2) - ((map_.height()/2)/90) * abs(lat));
+Visual::Point Visual::createPoint(PNG* map, double lat, double lon) {
+    int x = (int)((map->width()/2) - ((map->width()/2)/180) * abs(lon));
+    int y = (int)((map->height()/2) - ((map->height()/2)/90) * abs(lat));
 
     // If latitude is negative
     if (lat < 0) {
-        y = map_.height() - y;
+        y = map->height() - y;
     }
     // If longitude is positive
     if (lon > 0) {
-        x = map_.width() - x;
+        x = map->width() - x;
     }
     x = floor(x);
     y = floor(y);
@@ -56,7 +58,7 @@ Visual::Point Visual::createPoint(double lat, double lon) {
 */
 void Visual::print(PNG* output, Graph& graph, int vertex) {
     graph.adjacency_list[vertex]->label = "VISITED";
-    Point src = createPoint(graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
+    Visual::Point src = createPoint(output, graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
     printVertex(output, src);
 
     Graph::Edge* curr = graph.adjacency_list[vertex]; // curr == head
@@ -66,7 +68,7 @@ void Visual::print(PNG* output, Graph& graph, int vertex) {
     while (curr) {
         if (graph.adjacency_list[curr->data.first]->label == "UNEXPLORED") {
             curr->label = "DISCOVERY";
-            Point dest = createPoint(graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
+            Point dest = createPoint(output, graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
             printEdge(output, src, dest);
             // Recursive call
             print(output, graph, curr->data.first);
