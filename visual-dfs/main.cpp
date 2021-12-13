@@ -1,23 +1,10 @@
 // #include "include/adder.h"
 #include <iostream>
-<<<<<<< HEAD
 #include "graph.h"
 #include <vector>
-=======
-#include <unistd.h>
-#include <stdio.h>
->>>>>>> 8b7ab936fd034349404104372443b227b7159754
 
 
 int main() {
-    
-    char buff[1000];
-    getcwd( buff, 1000 );
-    std::string cwd( buff );
-    std::cout << "cwd: " << cwd << std::endl;
-
-    FILE* file = fopen("../data/base_map.png", "rb");
-    std::cout << file << std::endl;
 
     std::vector<Graph::Edge*> adjacency_list;
 
