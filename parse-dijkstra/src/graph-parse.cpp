@@ -135,7 +135,7 @@ void Graph::routeParse(std::string routes_file) {
         std::string aCell;
         int csvCol = 0;
         // std::cout << "first while loop" << std::endl;
-        std::cout << "index: " << index << std::endl;
+        // std::cout << "index: " << index << std::endl;
         while (std::getline(lineStream, aCell, ',')) {
             // std::cout << "index: " << index << std::endl;
             if (aCell == "\\N") {

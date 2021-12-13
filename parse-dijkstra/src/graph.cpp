@@ -209,7 +209,7 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
 * @return The distance between two points in kilometers
 */
 double Graph::calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
-    std::cout << "entered calculate distance" << std::endl;
+    // std::cout << "entered calculate distance" << std::endl;
     // getting distance in KILOMETERS
     double dist = -1.0;
     double earth_radius = 6371.0;
@@ -229,7 +229,7 @@ double Graph::calculateDistance(double longitude1, double latitude1, double long
 
     dist = earth_radius * c;    // calculates haversine formula to calculate distance between 2 points on earth
 
-    std::cout << "dist: " << dist << std::endl;
+    // std::cout << "dist: " << dist << std::endl;
 
     return dist;
 }
