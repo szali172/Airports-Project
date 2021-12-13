@@ -27,20 +27,12 @@ class Graph {
         * If the Edge is the head of it's linked list, data.first represents latitude, data.second represents longitude
         */
         struct Edge {
-<<<<<<< HEAD
-            std::pair<double, double> data;
-            std::string label;
-            // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
-            Edge* next;
-            Edge* prev;
-            double prev_index;
-            //std::list<Edge*>
-
-=======
             std::pair<double, double> data = std::make_pair(0.0, 0.0);
             std::string label = "UNEXPLORED";
+
             Edge* next = nullptr;
->>>>>>> 8b7ab936fd034349404104372443b227b7159754
+            double prev_index;
+            
             Edge(std::pair<double, double> data_, std::string label_) {
                 data = data_;
                 label = label_;
