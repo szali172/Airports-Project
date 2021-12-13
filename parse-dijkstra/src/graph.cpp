@@ -209,24 +209,27 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
 * @return The distance between two points in kilometers
 */
 double Graph::calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
+    std::cout << "entered calculate distance" << std::endl;
     // getting distance in KILOMETERS
     double dist = -1.0;
-    double earth_radius = 6371;
+    double earth_radius = 6371.0;
 
-    double lat1_radians = latitude1 * (M_PI / 180);
-    double lat2_radians = latitude1 * (M_PI / 180);
+    double lat1_radians = latitude1 * (M_PI / 180.0);
+    double lat2_radians = latitude1 * (M_PI / 180.0);
 
-    double lon1_radians = longitude1 * (M_PI / 180);    //TODO fix this??? (it was commented out originally)
-    double lon2_radians = longitude2 * (M_PI / 180);    //TODO fix this??? (it was commented out originally)
+    double lon1_radians = longitude1 * (M_PI / 180.0);    //TODO fix this??? (it was commented out originally)
+    double lon2_radians = longitude2 * (M_PI / 180.0);    //TODO fix this??? (it was commented out originally)
 
-    double lat_difference_radians = (latitude2 - latitude1) * (M_PI / 180);
-    double long_difference_radians = (longitude2 - longitude1) * (M_PI / 180);
+    double lat_difference_radians = (latitude2 - latitude1) * (M_PI / 180.0);
+    double long_difference_radians = (longitude2 - longitude1) * (M_PI / 180.0);
 
     // setting up a variables a and c for haversine formula
-    double a = ((sin(lat_difference_radians / 2) * sin(lat_difference_radians / 2)) + (cos(lat1_radians) * cos(lat2_radians) * sin(long_difference_radians / 2) * sin(long_difference_radians / 2)));
-    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    double a = ((sin(lat_difference_radians / 2.0) * sin(lat_difference_radians / 2.0)) + (cos(lat1_radians) * cos(lat2_radians) * sin(long_difference_radians / 2.0) * sin(long_difference_radians / 2.0)));
+    double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
 
     dist = earth_radius * c;    // calculates haversine formula to calculate distance between 2 points on earth
+
+    std::cout << "dist: " << dist << std::endl;
 
     return dist;
 }

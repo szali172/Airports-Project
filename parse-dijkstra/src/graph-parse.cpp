@@ -135,9 +135,9 @@ void Graph::routeParse(std::string routes_file) {
         std::string aCell;
         int csvCol = 0;
         // std::cout << "first while loop" << std::endl;
-
+        std::cout << "index: " << index << std::endl;
         while (std::getline(lineStream, aCell, ',')) {
-            std::cout << "aCell: " << index << std::endl;
+            // std::cout << "index: " << index << std::endl;
             if (aCell == "\\N") {
                 break;
             }
@@ -145,31 +145,65 @@ void Graph::routeParse(std::string routes_file) {
             try {
                 // std::cout << "entered try" << std::endl;
                 if (csvCol == SOURCE_INDEX) {
+                    // std::cout << "entered if" << std::endl;
                     // if (aCell == "\\N") {
                     //     continue;
                     // }
                     source_id = std::stod(aCell);       //store source airport value if the current cell is at the right index
                 } else if (csvCol == DESTINATION_INDEX) {
+                    // std::cout << "entered else if" << std::endl;
                     // if (aCell == "\\N") {
                     //     continue;
                     // }
                     destination_id = std::stod(aCell);  //store destination airport value ifparse-dijkstra/include the current cell is at the right index
+                    // std::cout << "set destination ID" << std::endl;
+                    break;
                 }
                 ++csvCol;
             } catch (const std::invalid_argument& ia) {
-                std::cerr << "Cannot convert to double: " << index << std::endl;
+                // std::cerr << "Cannot convert to double: " << index << std::endl;
                 // continue;
             } catch(const std::out_of_range& e) {
-                std::cerr << "out of range" << aCell << std::endl;
+                // std::cerr << "out of range" << aCell << std::endl;
                 // continue;
             }
         }
         
+        // std::cout << "finished inner while" << std::endl;
         // insert dest airport to the front of the src airport linked list in the adjacency list
         Edge* src = adjacency_list[source_id];
+
+        // std::cout << "after edge src" << std::endl;
+
         Edge* dest = adjacency_list[destination_id];
-        double distance = calculateDistance(dest->data.second, dest->data.first, src->data.second, src->data.first);
+
+        if (src == NULL || dest == NULL) {
+            continue;
+        }
+
+        // std::cout << "after edge dest" << std::endl;
+        // std::cout << "dest->data.second: " << dest->data.second << std::endl;
+        // std::cout << "dest->data.first: " << dest->data.first << std::endl;
+        // std::cout << "src->data.second: " << src->data.second << std::endl;
+        // std::cout << "src->data.first: " << src->data.first << std::endl;
+
+        double distance;
+        try {
+            // std::cout << "entered try" << std::endl;
+            distance = calculateDistance(dest->data.second, dest->data.first, src->data.second, src->data.first);
+        } catch (std::exception& e) {
+            // std::cerr << "problem line error: " << &e << std::endl;
+            // std::cout << "dest->data.second: " << dest->data.second << std::endl;
+            // std::cout << "dest->data.first: " << dest->data.first << std::endl;
+            // std::cout << "src->data.second: " << src->data.second << std::endl;
+            // std::cout << "src->data.first: " << src->data.first << std::endl;
+        }
+        
+        // std::cout << "after double distance" << std::endl;
+        
         std::pair <double, double> data (destination_id, distance);
+
+        // std::cout << "after std::pair <double, doubld> data line" << std::endl;
 
         Edge* edge = new Edge(data, "UNEXPLORED"); // Edge to insert at source_id index
         edge->next = adjacency_list[source_id]->next;
