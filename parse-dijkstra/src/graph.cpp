@@ -5,29 +5,29 @@
 #include <limits>
 #include <queue>
 
-/**
- * @brief when user passes in starting airport name
- * Parses through airports csv file until it finds a matching airport
- * Passed string could be an Airport name or IATA code
- * If no matching string is found, produce an error message
- * @param airports_file csv to parse
- * @param start starting airport to search for
- * @return index of starting airport (Airport ID)
- */
-int Graph::locateStart(std::string airports_file, std::string start) {
-    std::ifstream fs(airports_file);    //get airport csv file into the ifstream to be parsed
+// /**
+//  * @brief when user passes in starting airport name
+//  * Parses through airports csv file until it finds a matching airport
+//  * Passed string could be an Airport name or IATA code
+//  * If no matching string is found, produce an error message
+//  * @param airports_file csv to parse
+//  * @param start starting airport to search for
+//  * @return index of starting airport (Airport ID)
+//  */
+// int Graph::locateStart(std::string airports_file, std::string start) {
+//     std::ifstream fs(airports_file);    //get airport csv file into the ifstream to be parsed
 
-    std::string currLine;
-    while(std::getline(fs, currLine)) { //goes through every line in the csv file to find the starting airport (start param)
-        if (currLine.find(start, 0) != std::string::npos) {
-            int airportID = std::stoi(currLine.substr(0, currLine.find(',')));
-            return airportID;
-        }
-    }
+//     std::string currLine;
+//     while(std::getline(fs, currLine)) { //goes through every line in the csv file to find the starting airport (start param)
+//         if (currLine.find(start, 0) != std::string::npos) {
+//             int airportID = std::stoi(currLine.substr(0, currLine.find(',')));
+//             return airportID;
+//         }
+//     }
 
-    std::cout << "This staring airport cannot be found. Please check your input and try again." << std::endl;
-    exit(1);
-}
+//     std::cout << "This staring airport cannot be found. Please check your input and try again." << std::endl;
+//     exit(1);
+// }
 
 
 /**

@@ -23,7 +23,7 @@ Graph::Graph(std::string airports_file) {
 */
 Graph::Graph(std::string airports_file, std::string routes_file) {
     airportParse(airports_file);
-    routeParse(routes_file);
+    this->routeParse(routes_file);
 }
 
 
@@ -117,6 +117,7 @@ void Graph::airportParse(std::string airports_file) {
 * @param routes_file CSV file containing all the possible routes between 2 different airports
 */
 void Graph::routeParse(std::string routes_file) {
+    // std::cout << "entered route parse" << std::endl;
     std::ifstream data(routes_file);    //get routes csv file into the ifstream to be parsed
     std::string line;
 
@@ -133,14 +134,35 @@ void Graph::routeParse(std::string routes_file) {
         std::stringstream lineStream(line);
         std::string aCell;
         int csvCol = 0;
+        // std::cout << "first while loop" << std::endl;
 
         while (std::getline(lineStream, aCell, ',')) {
-            if (csvCol == SOURCE_INDEX) {
-                source_id = std::stod(aCell);       //store source airport value if the current cell is at the right index
-            } else if (csvCol == DESTINATION_INDEX) {
-                destination_id = std::stod(aCell);  //store destination airport value ifparse-dijkstra/include the current cell is at the right index
+            std::cout << "aCell: " << index << std::endl;
+            if (aCell == "\\N") {
+                break;
             }
-            ++csvCol;
+            // std::cout << "print line 141" << std::endl;
+            try {
+                // std::cout << "entered try" << std::endl;
+                if (csvCol == SOURCE_INDEX) {
+                    // if (aCell == "\\N") {
+                    //     continue;
+                    // }
+                    source_id = std::stod(aCell);       //store source airport value if the current cell is at the right index
+                } else if (csvCol == DESTINATION_INDEX) {
+                    // if (aCell == "\\N") {
+                    //     continue;
+                    // }
+                    destination_id = std::stod(aCell);  //store destination airport value ifparse-dijkstra/include the current cell is at the right index
+                }
+                ++csvCol;
+            } catch (const std::invalid_argument& ia) {
+                std::cerr << "Cannot convert to double: " << index << std::endl;
+                // continue;
+            } catch(const std::out_of_range& e) {
+                std::cerr << "out of range" << aCell << std::endl;
+                // continue;
+            }
         }
         
         // insert dest airport to the front of the src airport linked list in the adjacency list

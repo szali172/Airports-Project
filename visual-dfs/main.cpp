@@ -5,7 +5,6 @@
 
 
 int main() {
-    
     std::vector<Graph::Edge*> adjacency_list;
 
     Graph::Edge* firstedge = new Graph::Edge(std::make_pair(1, 6), "one");
