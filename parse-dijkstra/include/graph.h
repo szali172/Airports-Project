@@ -27,9 +27,9 @@ class Graph {
         * If the Edge is the head of it's linked list, data.first represents latitude, data.second represents longitude
         */
         struct Edge {
-            std::pair<double, double> data;
-            std::string label;
-            Edge* next;
+            std::pair<double, double> data = std::make_pair(0.0, 0.0);
+            std::string label = "UNEXPLORED";
+            Edge* next = nullptr;
             Edge(std::pair<double, double> data_, std::string label_) {
                 data = data_;
                 label = label_;

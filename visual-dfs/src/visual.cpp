@@ -1,5 +1,5 @@
 #include "../include/visual.h"
-#include <cmath>
+
 
 using cs225::PNG;
 using cs225::HSLAPixel;
@@ -12,41 +12,15 @@ using namespace Visual;
 * @param graph is the output from Dijkstra's
 * Perform DFS to traverse the SSSP graph
 */
-PNG Visual::print(Graph& graph, PNG map) {
+PNG Visual::visual(Graph& graph, PNG map) {
     PNG* output = new PNG(map); // Create a copy map to draw on
 
     for (unsigned vertex = 1; vertex < graph.adjacency_list.size(); vertex++) {
         if (graph.adjacency_list[vertex]->label == "UNEXPLORED") {
-            print(output, graph, vertex);
+            visual(output, graph, vertex);
         }
     }
     return *output;
-}
-
-
-/**
-* Creates an (x, y) Point with a given latitude and longitude coordinate
-* @param lat latitude
-* @param lon longitude
-* @return 2D Point (x, y) that represents the latitude and longitude on the map
-*/
-Visual::Point Visual::createPoint(PNG* map, double lat, double lon) {
-    int x = (int)((map->width()/2) - ((map->width()/2)/180) * abs(lon));
-    int y = (int)((map->height()/2) - ((map->height()/2)/90) * abs(lat));
-
-    // If latitude is negative
-    if (lat < 0) {
-        y = map->height() - y;
-    }
-    // If longitude is positive
-    if (lon > 0) {
-        x = map->width() - x;
-    }
-    x = floor(x);
-    y = floor(y);
-
-    Point p(x, y);
-    return p;
 }
 
 
@@ -56,10 +30,10 @@ Visual::Point Visual::createPoint(PNG* map, double lat, double lon) {
 * @param graph SSSP graph passed from Dijkstra's
 * @param vertex index of the airport in the adjacency list
 */
-void Visual::print(PNG* output, Graph& graph, int vertex) {
+void Visual::visual(PNG* output, Graph& graph, int vertex) {
     graph.adjacency_list[vertex]->label = "VISITED";
     Visual::Point src = createPoint(output, graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
-    printVertex(output, src);
+    drawAirport(output, src);
 
     Graph::Edge* curr = graph.adjacency_list[vertex]; // curr == head
     if (curr->next != NULL) curr = curr->next; // curr == next adjacent vertex
@@ -69,9 +43,9 @@ void Visual::print(PNG* output, Graph& graph, int vertex) {
         if (graph.adjacency_list[curr->data.first]->label == "UNEXPLORED") {
             curr->label = "DISCOVERY";
             Point dest = createPoint(output, graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
-            printEdge(output, src, dest);
+            drawEdge(output, src, dest);
             // Recursive call
-            print(output, graph, curr->data.first);
+            visual(output, graph, curr->data.first);
         }
         // Vertex has been already been visited
         // This edge is labeled as a back edge
@@ -82,14 +56,40 @@ void Visual::print(PNG* output, Graph& graph, int vertex) {
     }
 }
 
+/**
+* Creates an (x, y) Point with a given latitude and longitude coordinate
+* @param lat latitude
+* @param lon longitude
+* @return 2D Point (x, y) that represents the latitude and longitude on the map
+*/
+Visual::Point Visual::createPoint(PNG* map, double lat, double lon) {
+    
+    long double x = ((map->width()/2.0000) - ((map->width()/2.0000)/180.0000) * std::abs(lon));
+    long double y = ((map->height()/2.0000) - ((map->height()/2.0000)/90.0000) * std::abs(lat));
+
+    // If latitude is negative
+    if (lat < 0) {
+        y = double(map->height()) - y;
+    }
+    // If longitude is positive
+    if (lon > 0) {
+        x = double(map->width()) - x;
+    }
+
+    x = round(x);
+    y = round(y);
+
+    Point p(x, y);
+    return p;
+}
 
 /**
-* Helper function for print()
+* Helper function for visual()
 * prints a red dot on the map to represent the passed airport
 * @param map PNG to draw on
 * @param airport (x, y) coordinate for the airport
 */
-void Visual::printVertex(PNG* map, Visual::Point airport) {
+void Visual::drawAirport(PNG* map, Visual::Point airport) {
     HSLAPixel pixel;
     pixel.h = 2;
     pixel.s = 0.8;
@@ -115,13 +115,13 @@ void Visual::printVertex(PNG* map, Visual::Point airport) {
 
 
 /**
-* Helper function for print()
+* Helper function for visual()
 * prints only the edge from Airport A to B
 * @param map PNG to draw on
 * @param src source airport
 * @param dest destination airport
 */
-void Visual::printEdge(PNG* map, Visual::Point src, Visual::Point dest) {
+void Visual::drawEdge(PNG* map, Visual::Point src, Visual::Point dest) {
     // Either 0, 1, or -1
     // 0 = still value, 1 = incrementing, -1 = decrementing
     int xMove, yMove = 0;

@@ -78,9 +78,9 @@ void Graph::airportParse(std::string airports_file) {
                         }
                     }
                 } catch (const std::invalid_argument& ia) {
-                    std::cerr << "Cannot convert to double: " << aCell << std::endl;
+                    // std::cerr << "Cannot convert to double: " << aCell << std::endl;
                 } catch(const std::out_of_range& e) {
-                    std::cerr << "out of range" << aCell << std::endl;
+                    // std::cerr << "out of range" << aCell << std::endl;
                 }
                 csvCol++;
             }
@@ -103,7 +103,7 @@ void Graph::airportParse(std::string airports_file) {
         
         // inserting new node with no edges so far into current spot in adjacency list
         Edge* vertex = new Edge(std::pair<double, double>(latitude, longitude), "UNEXPLORED");
-        std::cout << "Edge #" << index << ": <" << vertex->data.first << ", " << vertex->data.second << ">" << std::endl;
+        // std::cout << "Edge #" << index << ": <" << vertex->data.first << ", " << vertex->data.second << ">" << std::endl;
         adjacency_list.push_back(vertex);
         index++;
     }
