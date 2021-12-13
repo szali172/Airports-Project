@@ -8,6 +8,8 @@
 #include <stack>
 #include <cmath>
 #include <utility>
+#include <stdexcept>
+#include <algorithm>
 
 
 class Graph {

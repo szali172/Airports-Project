@@ -44,8 +44,8 @@ void Graph::airportParse(std::string airports_file) {
     double latitude;
     double longitude;
     
-    const size_t LATITUDE_INDEX = 7;    //location within the airports_file that has the latitude value of the airport
-    const size_t LONGITUDE_INDEX = 6;   //location within the airports_file that has the longitude value of the airport
+    // const size_t LATITUDE_INDEX = 6;    //location within the airports_file that has the latitude value of the airport
+    // const size_t LONGITUDE_INDEX = 7;   //location within the airports_file that has the longitude value of the airport
 
     // gives us an index to insert into, starts at 1 because we don't want to insert into 0th
     int index = 1;
@@ -54,25 +54,56 @@ void Graph::airportParse(std::string airports_file) {
         std::stringstream lineStream(line);
         std::string aCell;
         int csvCol = 0;
+        bool lat = false;
 
         while (std::getline(lineStream, aCell, ',')) {  //goes through every comma within every line in the csv file
+            if (lat) {
+                longitude = std::stod(aCell);
+                break;
+            }
             if (csvCol == 0) {
                 while(index != std::stoi(aCell)) {      //if the airport_id (first col of every line) is not sequential, push back 
                                                         //null verticies to keep the airport and routes CSV files consistent with the adjacency list
                     adjacency_list.push_back(NULL);
                     ++index;
                 }
+                csvCol++;
+            } else {
+                try {
+                    if (csvCol >= 5) {                  // Edge case for converting IATA codes that may be digits, which we do not want converted to doubles
+                        double coordinate = std::stod(aCell);
+                        if (!lat) {
+                            latitude = coordinate;
+                            lat = true;
+                        }
+                    }
+                } catch (const std::invalid_argument& ia) {
+                    std::cerr << "Cannot convert to double: " << aCell << std::endl;
+                } catch(const std::out_of_range& e) {
+                    std::cerr << "out of range" << aCell << std::endl;
+                }
+                csvCol++;
             }
-            if (csvCol == LATITUDE_INDEX) {
-                latitude = std::stod(aCell);            //store latitude value if the current cell is at the right index
-            } else if (csvCol == LONGITUDE_INDEX) {
-                longitude = std::stod(aCell);           //store longitude value if the current cell is at the right index
-            }
-            ++csvCol;
+            // if (csvCol == 1) {
+            //     const char* name = aCell.c_str();
+            //     if (name[0] == "\"") {                 // Handles edge case for airport names with commas in the field
+            //         int idx = 0;
+            //         while (aCell[idx] != "\"") {
+            //             idx++;
+            //         }
+            //     }
+            // }
+            // if (csvCol == LATITUDE_INDEX) {
+            //     latitude = std::stod(aCell);            //store latitude value if the current cell is at the right index
+            // } else if (csvCol == LONGITUDE_INDEX) {
+            //     longitude = std::stod(aCell);           //store longitude value if the current cell is at the right index
+            // }
+            // ++csvCol;
         }
         
         // inserting new node with no edges so far into current spot in adjacency list
         Edge* vertex = new Edge(std::pair<double, double>(latitude, longitude), "UNEXPLORED");
+        std::cout << "Edge #" << index << ": <" << vertex->data.first << ", " << vertex->data.second << ">" << std::endl;
         adjacency_list.push_back(vertex);
         index++;
     }
