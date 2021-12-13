@@ -2,7 +2,7 @@
 
 #include "HSLAPixel.h"
 #include "PNG.h"
-#include "graph.h"
+#include "../../parse-dijkstra/include/graph.h"
 
 #include <iostream>
 #include <cmath>

@@ -72,11 +72,11 @@ Once it successfully compiles, you can then run the program and generate the vis
 ```
 $ src/main [Airport Data Location] [Route Data Location] [Source Airport] [Destination Airport] [Image Location]
 ```
-+ `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at data/airports.csv
-+ `Route Data Location` : The file location of the routes dataset. The data can be found at data/routes.csv
-+ `Source Airport` : The OpenFlights unique identified for the starting airport
-+ `Destination Airport` : The OpenFlights unique identified for the ending airport
-+ `Image Location` : The desired output location for the PNG file (must end in .png)
++ `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at "data/airports.csv"
++ `Route Data Location` : The file location of the routes dataset. The data can be found at "data/routes.csv
++" `Source Airport` : The OpenFlights unique identified for the starting airport, i.e. "ORD"
++ `Destination Airport` : The OpenFlights unique identified for the ending airport, i.e. "NBO"
++ `Image Location` : The desired output location for the PNG file (must end in .png), i.e. "data/base_map.png"
 
 After running the commnd above, you may see in the console if any inputs were invalid, or if the arguments were successfully inputed, the correct output of the program
 

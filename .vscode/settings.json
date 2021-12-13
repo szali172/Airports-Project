@@ -82,5 +82,6 @@
         "locale": "cpp",
         "queue": "cpp",
         "stack": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
