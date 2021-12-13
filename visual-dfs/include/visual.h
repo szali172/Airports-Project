@@ -3,9 +3,11 @@
 #include "HSLAPixel.h"
 #include "PNG.h"
 #include "graph.h"
+#include "Animation.h"
 
 #include <iostream>
 #include <cmath>
+#include <utility>
 
 using cs225::PNG;
 namespace Visual {
@@ -20,12 +22,13 @@ namespace Visual {
     };
 
     /**
+    * Perform DFS to traverse the SSSP graph
     * @brief Prints all the airports and routes onto a PNG
     * @param graph is the output from Dijkstra's
     * @param map base_map.png to draw from
-    * Perform DFS to traverse the SSSP graph
+    * @return pair containing the drawn PNG and the Animation of the DFS traversal
     */
-    PNG visual(Graph& graph, PNG map);
+    std::pair<PNG, Animation> visual(Graph& graph, PNG map);
 
     /**
     * Helper function to perform DFS
@@ -63,4 +66,5 @@ namespace Visual {
     */
     void drawEdge(PNG* map, Point src, Point dest);
 
+    extern Animation animation;
 };
