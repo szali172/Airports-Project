@@ -27,13 +27,35 @@ class Graph {
         * If the Edge is the head of it's linked list, data.first represents latitude, data.second represents longitude
         */
         struct Edge {
+<<<<<<< HEAD
+            std::pair<double, double> data;
+            std::string label;
+            // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
+            Edge* next;
+            Edge* prev;
+            double prev_index;
+            //std::list<Edge*>
+
+=======
             std::pair<double, double> data = std::make_pair(0.0, 0.0);
             std::string label = "UNEXPLORED";
             Edge* next = nullptr;
+>>>>>>> 8b7ab936fd034349404104372443b227b7159754
             Edge(std::pair<double, double> data_, std::string label_) {
                 data = data_;
                 label = label_;
             }
+            Edge(std::pair<double, double> data_, double prev_index_) {
+                data = data_;
+                prev_index = prev_index_;
+            }
+        };
+
+        class EdgeComparator {
+            public:
+                double operator()(Edge* edge1, Edge* edge2) {
+                    return edge1->data.second > edge2->data.second;
+                }
         };
 
 
@@ -60,7 +82,7 @@ class Graph {
         * @param starting node
         * @return SSSP graph
         */
-        Graph dijkstra(Graph graph, int start);
+        Graph dijkstra(std::vector<Edge*> graph, double start);
 
         /**
         * @brief Calculates the distance between two coordinates in the world map (2 dimensions, longitude and latitude)
@@ -108,12 +130,17 @@ class Graph {
         */
         Graph(std::string airports_file, std::string routes_file);
 
+        // SET ADJACENCY LIST
+        Graph(std::vector<Edge*> adj_list) {
+            adjacency_list = adj_list;
+        }
+
         std::vector<Edge*> adjacency_list;  // the adjacency list which contains the verticies and edges of the airports and their location relative to each other
 
 
     private:
         int start_; //the starting airport??? //TODO fix this definition - idk what this is
-
+        //std::priority_queue<Edge*, std::vector<Edge*>, EdgeComparator> pq;
 
         //graph-parse.cpp
 

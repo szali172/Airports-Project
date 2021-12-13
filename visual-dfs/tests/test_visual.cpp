@@ -227,7 +227,8 @@ TEST_CASE("Visual - Draw entire data", "[weight=0][part=3]") {
   map->readFromFile("../data/base_map.png");
   std::cout << map->width() << std::endl;
 
-  PNG output = Visual::visual(g, *map);
+  std::pair<PNG, Animation> output;
+  output = Visual::visual(g, *map);
 
   HSLAPixel red;
   red.h = 2;
@@ -238,6 +239,6 @@ TEST_CASE("Visual - Draw entire data", "[weight=0][part=3]") {
   for (unsigned i = 1; i < g.adjacency_list.size(); i++) {
 
     Visual::Point p = Visual::createPoint(map, g.adjacency_list[i]->data.first, g.adjacency_list[i]->data.second);
-    REQUIRE(output.getPixel(p.x, p.y) == red);
+    REQUIRE(output.first.getPixel(p.x, p.y) == red);
   }
 }
