@@ -75,7 +75,7 @@ class Graph {
         * @param starting node
         * @return SSSP graph
         */
-        std::vector<Graph::Edge*> dijkstra(std::vector<Edge*> graph, double start);
+        Graph dijkstra(std::vector<Edge*> graph, double start);
 
         /**
         * @brief Calculates the distance between two coordinates in the world map (2 dimensions, longitude and latitude)

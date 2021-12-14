@@ -34,11 +34,15 @@ int main() {
 
     Graph graph(adjacency_list);
 
-    std::vector<Graph::Edge*> output = graph.dijkstra(graph.adjacency_list, 1.0);
+    Graph airports("../data/airports.csv");
 
-    for (unsigned i = 1; i < output.size(); i++) {
+    std::cout << airports.adjacency_list.size() << std::endl;
+
+    Graph output = graph.dijkstra(graph.adjacency_list, 1.0);
+
+    for (unsigned i = 1; i < output.adjacency_list.size(); i++) {
         std::cout << i << std::endl;
-        Graph::Edge* neighbor = output[i]->next;
+        Graph::Edge* neighbor = output.adjacency_list[i]->next;
         while (neighbor != NULL) {
             std::cout << " -> (" << neighbor->data.first << ", " << neighbor->data.second << ") " << std::endl;
             neighbor = neighbor->next;

@@ -15,6 +15,7 @@ TEST_CASE("Locate Starting Airport", "[weight=0][part=1]") {
   REQUIRE(g.locateStart("../data/airports.csv", "Chicago O'Hare International Airport") == 3830);
 }
 
+/*
 TEST_CASE("Calculate Distance", "[weight=0][part=1]") {
   Graph g("../data/airports.csv");
 
@@ -50,3 +51,4 @@ TEST_CASE("Calculate Distance", "[weight=0][part=1]") {
 
   REQUIRE(g.calculateDistance(long1, lat1, long2, lat2) == dist);
 }
+*/
