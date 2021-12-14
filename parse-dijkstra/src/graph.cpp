@@ -37,7 +37,6 @@ int locateStart(std::string airports_file, std::string start) {
 * @return SSSP graph
 */
 std::vector<Graph::Edge*> Graph::dijkstra(std::vector<Edge*> graph, double start) {   //TODO finish up this function and add useful comments
-    std::cout << "Reached line " << __LINE__ << std::endl;
 // Declaring priority queue, priority queue helper for queue operations, and "infinity" integer
     std::priority_queue<Graph::Edge*, std::vector<Graph::Edge*>, Graph::EdgeComparator> pq;
     std::priority_queue<Graph::Edge*, std::vector<Graph::Edge*>, Graph::EdgeComparator> pq_helper;
@@ -45,20 +44,14 @@ std::vector<Graph::Edge*> Graph::dijkstra(std::vector<Edge*> graph, double start
 
 // Printing everything in adjacency list
 for (unsigned i = 1; i < adjacency_list.size(); i++) {
-  std::cout << "Current vertext in list: " << adjacency_list[i]->data.first << std::endl;
   Graph::Edge* neighbor = adjacency_list[i]->next;
   while (neighbor != NULL) {
-      std::cout << "Current neighbor of current vertex: " << neighbor->data.first << std::endl;
-      std::cout << "Current neighbor's distance to current vertex: " << neighbor->data.second << std::endl;
       neighbor = neighbor->next;
   }
 }
 
-// Putting all vertices from adjacency list (main graph structure) into priority queue
-    std::cout << "Reached line " << __LINE__ << std::endl;
-    // Pushing all nodes to priority queue with distance infinity and prev NULL (except source node will be pushed with distance 0)
+// Putting all vertices from adjacency list (main graph structure) into priority queue with distance infinity and prev NULL (except source node will be pushed with distance 0)
     for (unsigned i = 1; i < adjacency_list.size(); i++) {
-      std::cout << "Reached line " << __LINE__ << std::endl;
         if (i != start && adjacency_list[i] == NULL) {
             continue;
         }
@@ -69,8 +62,6 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
             Graph::Edge* pushedge = new Graph::Edge(std::make_pair(i, 0), NULL);
             pq.push(pushedge);
         }
-        std::cout << "Reached line " << __LINE__ << std::endl;
-        //std::cout << "Element at i in adjacency_list: " << "Airport: " << adjacency_list[i]->data.first << " Distance from source: " << adjacency_list[i]->data.second << std::endl;
     }
 
  // Shortest path tree to be returned
@@ -83,40 +74,29 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
  }
  
 
- std::cout << "Reached line " << __LINE__ << std::endl;
+
 
  for (unsigned i = 1; i < adjacency_list.size(); i++) {
-   //std::cout << "Reached line " << __LINE__ << std::endl;
 
    // Removing minimum element from priority queue
    Graph::Edge* u = pq.top();
-   std::cout << "U->data.first: " << u->data.first << std::endl;
    pq.pop();
-   //shortestpath.push_back(u);
 
-   // Pushing it to shortest path tree
+   // Inserting it into shortest path tree
    shortestpath[u->data.first] = u;
-   std::cout << "airport at shortestpath at u->data.first: " << shortestpath[u->data.first]->data.first << std::endl;
-
    
    // Going through every neighbor of u, starting at the first neighbor
    Graph::Edge* v = adjacency_list[u->data.first]->next;
 
     // Check if v (neighbor of u) is in T
     while (v != NULL) {
-      //std::cout << "Reached line " << __LINE__ << std::endl;
-
       // v is already in T
       if (shortestpath[v->data.first] != NULL && adjacency_list[v->data.first] != NULL) {
-        //std::cout << "Reached line " << __LINE__ << std::endl;
         v = v->next;
         continue;
 
       // v is not already in T
       } else if (shortestpath[v->data.first] == NULL && adjacency_list[v->data.first] != NULL) {
-        // d[v] = queue distance
-        //std::priority_queue<Graph::Edge*, std::vector<Graph::Edge*>, Graph::EdgeComparator> pq_helper;
-        // sus
         double v_current_distance;
         
         // Search through queue to find v and its distance from the source node
@@ -152,40 +132,19 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
     }
  }
 
- std::cout << "Reached line " << __LINE__ << std::endl;
- /*
-  // making edges attachment   // making edges attachment
-   if (u->prev != NULL) {
-     std::cout << "u->prev: " << u->prev->data.first << std::endl;
-     Graph::Edge* tmp = shortestpath[u->prev->data.first]->next;
-     shortestpath[u->prev->data.first]->next = u;
-     u->
- */
-
- 
+ // Making edge connections
+ // If a vertex x has previous node y, then vertex y contains x in its edge list 
  for (unsigned i = 1; i < shortestpath.size(); i++) {
-   std::cout << "Index: " << i << std::endl;
    if (shortestpath[i]->prev != NULL) {
-     if (shortestpath[i]->prev->prev != NULL) {
-       shortestpath[i]->prev->prev = NULL;
-     }
      double prev_index = shortestpath[i]->prev->data.first;
-  
 
-     Graph::Edge* neighbor = shortestpath[i]->next;
-     while (neighbor != NULL) {
-       std::cout << "Current vertex in shortest path: " << i << std::endl;
-       std::cout << i << " -> (" << neighbor->data.first << ", " << neighbor->data.second << std::endl;
-       neighbor = neighbor->next;
-     } 
-
-     Graph::Edge* tmp = shortestpath[prev_index]->next;
-     shortestpath[prev_index]->next = shortestpath[i];
-     shortestpath[prev_index]->next->next = tmp;
+     Graph::Edge* curr = shortestpath[prev_index];
+     while (curr->next != NULL) {
+       curr = curr->next;
+     }
+     curr->next = new Graph::Edge(std::make_pair(shortestpath[i]->data.first, shortestpath[i]->data.second), NULL);     
    }
  }
- 
-
 
  return shortestpath;
 }
@@ -201,24 +160,27 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
 * @return The distance between two points in kilometers
 */
 double Graph::calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
+    // std::cout << "entered calculate distance" << std::endl;
     // getting distance in KILOMETERS
     double dist = -1.0;
-    double earth_radius = 6371;
+    double earth_radius = 6371.0;
 
-    double lat1_radians = latitude1 * (M_PI / 180);
-    double lat2_radians = latitude1 * (M_PI / 180);
+    double lat1_radians = latitude1 * (M_PI / 180.0);
+    double lat2_radians = latitude2 * (M_PI / 180.0);
 
-    double lon1_radians = longitude1 * (M_PI / 180);    //TODO fix this??? (it was commented out originally)
-    double lon2_radians = longitude2 * (M_PI / 180);    //TODO fix this??? (it was commented out originally)
+    double lon1_radians = longitude1 * (M_PI / 180.0);    //TODO fix this??? (it was commented out originally)
+    double lon2_radians = longitude2 * (M_PI / 180.0);    //TODO fix this??? (it was commented out originally)
 
-    double lat_difference_radians = (latitude2 - latitude1) * (M_PI / 180);
-    double long_difference_radians = (longitude2 - longitude1) * (M_PI / 180);
+    double lat_difference_radians = (latitude2 - latitude1) * (M_PI / 180.0);
+    double long_difference_radians = (longitude2 - longitude1) * (M_PI / 180.0);
 
     // setting up a variables a and c for haversine formula
-    double a = ((sin(lat_difference_radians / 2) * sin(lat_difference_radians / 2)) + (cos(lat1_radians) * cos(lat2_radians) * sin(long_difference_radians / 2) * sin(long_difference_radians / 2)));
-    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    double a = ((sin(lat_difference_radians / 2.0) * sin(lat_difference_radians / 2.0)) + (cos(lat1_radians) * cos(lat2_radians) * sin(long_difference_radians / 2.0) * sin(long_difference_radians / 2.0)));
+    double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
 
     dist = earth_radius * c;    // calculates haversine formula to calculate distance between 2 points on earth
+
+    // std::cout << "dist: " << dist << std::endl;
 
     return dist;
 }

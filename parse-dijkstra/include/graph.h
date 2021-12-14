@@ -29,12 +29,11 @@ class Graph {
         struct Edge {
             std::pair<double, double> data = std::make_pair(0.0, 0.0);
             std::string label = "UNEXPLORED";
+
             // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
             Edge* next = nullptr;
             Edge* prev;
             double prev_index;
-            //std::list<Edge*>
-
             Edge(std::pair<double, double> data_, std::string label_) {
                 data = data_;
                 label = label_;
