@@ -9,6 +9,7 @@ file(GLOB INCLUDES "includes/*.h")
 # Add src files
 file(GLOB SOURCES "src/*.cpp")
 
+
 # Add testing sources
 file(GLOB TEST_SOURCES "tests/*.cpp")
 
