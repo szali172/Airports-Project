@@ -12,17 +12,21 @@ namespace Visual {
     * @param graph is the output from Dijkstra's
     * Perform DFS to traverse the SSSP graph
     */
-    std::pair<PNG, Animation> visual(Graph& graph, PNG map) {
-        animation.addFrame(map); // Add blank image as first frame for animation
+    PNG visual(Graph& graph, PNG map) {
+        //animation.addFrame(map); // Add blank image as first frame for animation
         PNG* output = new PNG(map); // Create a copy map to draw on
 
 
         for (unsigned vertex = 1; vertex < graph.adjacency_list.size(); vertex++) {
-            if (graph.adjacency_list[vertex]->label == "UNEXPLORED") {
-                visual(output, graph, vertex);
+            std::cout << "FOR LOOP" << std::endl;
+            if (graph.adjacency_list[vertex] != NULL) {
+                if (graph.adjacency_list[vertex]->label == "UNEXPLORED") {
+                    visual(output, graph, vertex);
+                }
             }
         }
-        return std::pair<PNG, Animation>(*output, animation);
+        //return std::pair<PNG, Animation>(*output, animation);
+        return *output;
     }
 
 
@@ -33,6 +37,7 @@ namespace Visual {
     * @param vertex index of the airport in the adjacency list
     */
     void visual(PNG* output, Graph& graph, int vertex) {
+        // std::cout << "Airport #:" << vertex << std::endl;
         graph.adjacency_list[vertex]->label = "VISITED";
         Visual::Point src = createPoint(output, graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
         drawAirport(output, src);
@@ -44,6 +49,7 @@ namespace Visual {
         while (curr) {
             if (graph.adjacency_list[curr->data.first]->label == "UNEXPLORED") {
                 curr->label = "DISCOVERY";
+                // std::cout << "[" << vertex << "] -> <" << curr->data.first << " | DISCOVERY>" << std::endl;
                 Point dest = createPoint(output, graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
                 drawEdge(output, src, dest);
                 // Recursive call
@@ -54,6 +60,7 @@ namespace Visual {
             else if (curr->label == "UNEXPLORED") {
                 curr->label = "BACK";
             }
+            // std::cout << "curr->next" << std::endl;
             curr = curr->next;
         }
     }
@@ -124,35 +131,91 @@ namespace Visual {
     * @param dest destination airport
     */
     void drawEdge(PNG* map, Visual::Point src, Visual::Point dest) {
-        // Either 0, 1, or -1
-        // 0 = still value, 1 = incrementing, -1 = decrementing
-        int xMove, yMove = 0;
+        // // Either 0, 1, or -1
+        // // 0 = still value, 1 = incrementing, -1 = decrementing
+        // int xMove, yMove = 0;
 
-        if (src.x < dest.x) xMove  = 1;
-        else if (src.x > dest.x) xMove = -1;
+        // if (src.x < dest.x) xMove  = 1;
+        // else if (src.x > dest.x) xMove = -1;
         
-        if (src.y < dest.y) yMove = 1;
-        else if (src.y > dest.y) yMove = -1;
+        // if (src.y < dest.y) yMove = 1;
+        // else if (src.y > dest.y) yMove = -1;
 
-        int i = src.x;
-        int j = src.y;
-        int frameInterval = 0; // Every 10 frameIntervals add current PNG state to animation
-        while (i != dest.x && j != dest.y) {
-            if (frameInterval % 10 == 0) {
-                animation.addFrame(*map);
-            }
-            if (xMove == 1) i++;
-            else if (xMove == -1) i--;
+        // int i = src.x;
+        // int j = src.y;
+        // //int frameInterval = 0; // Every 10 frameIntervals add current PNG state to animation
+        // while (i != dest.x && j != dest.y) {
+        //     // if (frameInterval % 10 == 0) {
+        //     //     animation.addFrame(*map);
+        //     // }
+        //     if (xMove == 1) i++;
+        //     else if (xMove == -1) i--;
 
-            if (yMove == 1) j++;
-            else if (yMove == -1) j--;
+        //     if (yMove == 1) j++;
+        //     else if (yMove == -1) j--;
 
-            HSLAPixel & pixel = map->getPixel(i, j);
-            pixel.h = 2;
-            pixel.s = 0.8;
-            pixel.l = 0.47;
-            pixel.a = 0.8;
-            frameInterval++;
+        //     HSLAPixel & pixel = map->getPixel(i, j);
+        //     pixel.h = 2;
+        //     pixel.s = 0.8;
+        //     pixel.l = 0.47;
+        //     pixel.a = 0.8;
+        //     //frameInterval++;
+        // }
+        double m;
+        double src_cX = src.x - 2500.0;
+        double src_cY = 1250.0 - src.y;
+        double dest_cX = dest.x - 2500.0;
+        double dest_cY = 1250.0 - dest.y;
+        if (dest.x == src.x) {          // Case where Denominator == 0
+            m = 0;
+        } else {
+            m = (dest_cY - src_cY)/(dest_cX - src_cX);
         }
+
+        // Find y-intercept
+        double b = src_cY - (m * src_cX);
+        
+        if (src.x < dest.x) {
+            for (unsigned x = src.x; x <= dest.x; x++) {
+
+                double normal_x = (double)x - 2500.0;
+                double normal_y = m*(normal_x) + b;
+
+                double y = 1250.0 - normal_y;
+                y = round(y);
+
+                if (x == dest.x || y == dest.y) {
+                    break;
+                }
+
+                HSLAPixel & pixel = map->getPixel(x, y);
+                pixel.h = 2;
+                pixel.s = 0.8;
+                pixel.l = 0.47;
+                pixel.a = 0.8;
+
+            }
+        } else {
+            for (int x = src.x; x > dest.x; x--) {
+                
+                double normal_x = (double)x - 2500.0;
+                double normal_y = m*(normal_x) + b;
+
+                double y = 1250.0 - normal_y;
+                y = round(y);
+
+                if (x == dest.x || y == dest.y) {
+                    break;
+                }
+
+
+                HSLAPixel & pixel = map->getPixel(x, y);
+                pixel.h = 2;
+                pixel.s = 0.8;
+                pixel.l = 0.47;
+                pixel.a = 0.8;
+            }
+        }
+        
     }
 }

@@ -28,7 +28,7 @@ namespace Visual {
     * @param map base_map.png to draw from
     * @return pair containing the drawn PNG and the Animation of the DFS traversal
     */
-    std::pair<PNG, Animation> visual(Graph& graph, PNG map);
+    PNG visual(Graph& graph, PNG map);
 
     /**
     * Helper function to perform DFS

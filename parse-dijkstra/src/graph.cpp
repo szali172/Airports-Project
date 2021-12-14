@@ -6,7 +6,7 @@
 #include <queue>
 
 /**
- * @brief when user passes in starting airport
+ * @brief when user passes in starting airport name
  * Parses through airports csv file until it finds a matching airport
  * Passed string could be an Airport name or IATA code
  * If no matching string is found, produce an error message

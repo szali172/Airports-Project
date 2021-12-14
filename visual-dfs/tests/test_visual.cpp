@@ -221,15 +221,18 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
 
 
 TEST_CASE("Visual - Draw entire data", "[weight=0][part=3]") {
-  Graph g("../data/airports.csv");
+  Graph g("../data/airports.csv", "../data/routes.csv");
+  std::cout << g.adjacency_list.size() << std::endl;
   PNG png;
   PNG* map = &png;
   map->readFromFile("../data/base_map.png");
   std::cout << map->width() << std::endl;
 
-  std::pair<PNG, Animation> output;
-  output = Visual::visual(g, *map);
+  std::cout << "Airport 2030: " << g.adjacency_list[2030]->data.first << ", " << g.adjacency_list[2030]->data.second << std::endl;
 
+//   std::pair<PNG, Animation> output;
+  PNG output = Visual::visual(g, *map);
+  std::cout << "COMPLETED VISUAL()" << std::endl;
   HSLAPixel red;
   red.h = 2;
   red.s = 0.8;
@@ -237,8 +240,10 @@ TEST_CASE("Visual - Draw entire data", "[weight=0][part=3]") {
   red.a = 0.8;
 
   for (unsigned i = 1; i < g.adjacency_list.size(); i++) {
-
-    Visual::Point p = Visual::createPoint(map, g.adjacency_list[i]->data.first, g.adjacency_list[i]->data.second);
-    REQUIRE(output.first.getPixel(p.x, p.y) == red);
+      if (g.adjacency_list[i] != NULL) {
+        Visual::Point p = Visual::createPoint(map, g.adjacency_list[i]->data.first, g.adjacency_list[i]->data.second);
+        REQUIRE(output.getPixel(p.x, p.y) == red);
+      }
   }
+  output.writeToFile("output.png");
 }
