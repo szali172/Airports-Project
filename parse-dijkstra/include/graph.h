@@ -30,16 +30,17 @@ class Graph {
             std::pair<double, double> data = std::make_pair(0.0, 0.0);
             std::string label = "UNEXPLORED";
 
+            // airport neighbor list is NOT doubly linked - next airport is current airport's next airport, prev is just for the sake of Dijkstra's
             Edge* next = nullptr;
+            Edge* prev;
             double prev_index;
-            
             Edge(std::pair<double, double> data_, std::string label_) {
                 data = data_;
                 label = label_;
             }
-            Edge(std::pair<double, double> data_, double prev_index_) {
+            Edge(std::pair<double, double> data_, Edge* prev_) {
                 data = data_;
-                prev_index = prev_index_;
+                prev = prev_;
             }
         };
 
@@ -74,7 +75,7 @@ class Graph {
         * @param starting node
         * @return SSSP graph
         */
-        Graph dijkstra(std::vector<Edge*> graph, double start);
+        std::vector<Graph::Edge*> dijkstra(std::vector<Edge*> graph, double start);
 
         /**
         * @brief Calculates the distance between two coordinates in the world map (2 dimensions, longitude and latitude)

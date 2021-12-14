@@ -27,7 +27,33 @@ int main() {
     adjacency_list.push_back(secondedge);
     adjacency_list.push_back(thirdedge);
     */
-    
+   /*
+
+           struct Edge {
+            std::string label;
+            Edge* next = nullptr;
+            double prev_index;
+            
+            std::pair<double, double> data = std::make_pair(0.0, 0.0);
+            std::string label = "UNEXPLORED";
+
+            Edge(std::pair<double, double> data_, std::string label_) {
+                data = data_;
+                label = label_;
+            }
+            Edge(std::pair<double, double> data_, double prev_index_) {
+                data = data_;
+                prev_index = prev_index_;
+            }
+        };
+
+        class EdgeComparator {
+            public:
+                double operator()(Edge* edge1, Edge* edge2) {
+                    return edge1->data.second > edge2->data.second;
+                }
+        };
+    */
 
     return 0;
 }
