@@ -7,7 +7,7 @@ TEST_ADDER="test-adder"
 TEST_DIJKSTRA="test-parse-dijkstra"
 TEST_VISUAL="test-visual-dfs"
 
-echo "Testing Dijkstra"
+echo "Testing Dijkstra and Parser"
 cd parse-dijkstra/
 ./$TEST_DIJKSTRA
 cd ..

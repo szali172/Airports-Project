@@ -42,14 +42,6 @@ std::vector<Graph::Edge*> Graph::dijkstra(std::vector<Edge*> graph, double start
     std::priority_queue<Graph::Edge*, std::vector<Graph::Edge*>, Graph::EdgeComparator> pq_helper;
     int inf = std::numeric_limits<int>::max();
 
-// Printing everything in adjacency list
-for (unsigned i = 1; i < adjacency_list.size(); i++) {
-  Graph::Edge* neighbor = adjacency_list[i]->next;
-  while (neighbor != NULL) {
-      neighbor = neighbor->next;
-  }
-}
-
 // Putting all vertices from adjacency list (main graph structure) into priority queue with distance infinity and prev NULL (except source node will be pushed with distance 0)
     for (unsigned i = 1; i < adjacency_list.size(); i++) {
         if (i != start && adjacency_list[i] == NULL) {
@@ -135,7 +127,7 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
  // Making edge connections
  // If a vertex x has previous node y, then vertex y contains x in its edge list 
  for (unsigned i = 1; i < shortestpath.size(); i++) {
-   if (shortestpath[i]->prev != NULL) {
+   if (shortestpath[i] != NULL && shortestpath[i]->prev != NULL) {
      double prev_index = shortestpath[i]->prev->data.first;
 
      Graph::Edge* curr = shortestpath[prev_index];
@@ -144,6 +136,13 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
      }
      curr->next = new Graph::Edge(std::make_pair(shortestpath[i]->data.first, shortestpath[i]->data.second), NULL);     
    }
+
+ } 
+ for (unsigned i = 1; i < shortestpath.size(); i++) {
+  if (shortestpath[i] != NULL) {
+    shortestpath[i]->data.first = adjacency_list[i]->data.first;
+    shortestpath[i]->data.second = adjacency_list[i]->data.second;
+  }
  }
 
  return shortestpath;

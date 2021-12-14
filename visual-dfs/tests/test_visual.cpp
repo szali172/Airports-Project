@@ -18,15 +18,15 @@ using namespace cs225;
 using namespace Visual;
 
 TEST_CASE("Lat-Lon to pixel formula", "[weight=0][part=3]") {
-  std::cout << "Entered Test" << std::endl;
+  // std::cout << "Entered Test" << std::endl;
   Graph g;
-  std::cout << "Created Graph" << std::endl;
+  // std::cout << "Created Graph" << std::endl;
   PNG png;
   PNG* map = &png;
-  std::cout << "Created PNG" << std::endl;
+  // std::cout << "Created PNG" << std::endl;
   map->readFromFile("../data/base_map.png");
-  std::cout << map->width() << std::endl;
-  std::cout << "Read from file" << std::endl;
+  // std::cout << map->width() << std::endl;
+  // std::cout << "Read from file" << std::endl;
   Point p = createPoint(map, 10, 67.34);
   REQUIRE(p.x == 3435);
   REQUIRE(p.y == 1111);
@@ -65,7 +65,7 @@ void DFS(Graph& graph) {
 
 void DFS(Graph& graph, int vertex) {
     graph.adjacency_list[vertex]->label = "VISITED";
-    std::cout << "Vertex " << vertex << " == " << graph.adjacency_list[vertex]->label << std::endl;
+    // std::cout << "Vertex " << vertex << " == " << graph.adjacency_list[vertex]->label << std::endl;
     //Visual::Point src = createPoint(output, graph.adjacency_list[vertex]->data.first, graph.adjacency_list[vertex]->data.second);
     //printVertex(output, src);
 
@@ -74,15 +74,15 @@ void DFS(Graph& graph, int vertex) {
       //std::cout << "Entered curr->next != NULL" << std::endl; 
       curr = curr->next;  // curr == next adjacent vertex 
     } else {
-      std::cout << "curr->next == NULL, returning..." << std::endl;
+      // std::cout << "curr->next == NULL, returning..." << std::endl;
       return; // next adjacent vertex does not exist
     }
     while (curr) {
-      std::cout << "index: " << vertex << std::endl;
-      std::cout << "Curr: " << curr->data.first << ", " << curr->data.second << " | " << curr->label << std::endl;
+      // std::cout << "index: " << vertex << std::endl;
+      // std::cout << "Curr: " << curr->data.first << ", " << curr->data.second << " | " << curr->label << std::endl;
       if (graph.adjacency_list[curr->data.first]->label == "UNEXPLORED") {
           curr->label = "DISCOVERY";
-          std::cout << "->Curr: " << curr->data.first << ", " << curr->data.second << " | " << curr->label << std::endl;
+          // std::cout << "->Curr: " << curr->data.first << ", " << curr->data.second << " | " << curr->label << std::endl;
           //Point dest = createPoint(output, graph.adjacency_list[curr->data.first]->data.first, graph.adjacency_list[curr->data.first]->data.second);
           //printEdge(output, src, dest);
           // Recursive call
@@ -92,10 +92,10 @@ void DFS(Graph& graph, int vertex) {
       // This edge is labeled as a back edge
       else if (curr->label == "UNEXPLORED") {
           curr->label = "BACK";
-          std::cout << "->Curr: " << curr->data.first << ", " << curr->data.second << " | " << curr->label << std::endl;
+          // std::cout << "->Curr: " << curr->data.first << ", " << curr->data.second << " | " << curr->label << std::endl;
       }
       //std::cout << "Vertex == " << vertex << std::endl;
-      std::cout << "CURR = CURR->NEXT" << std::endl;
+      // std::cout << "CURR = CURR->NEXT" << std::endl;
       curr = curr->next;
     }
 }
@@ -178,17 +178,17 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
   dfs.addEdge(7, &L);
 
   // Call function to perform DFS
-  for (unsigned i = 1; i < dfs.adjacency_list.size(); i++) {
-    std::cout << "[" << i << "]";
-    Graph::Edge* curr = dfs.adjacency_list[i];
-    while (curr->next != NULL) {
-      curr = curr->next;
-      std::cout << " -> [" << curr->data.first << ", " << curr->data.second << "]";
-    } 
-    std::cout << std::endl;
-  }
+  // for (unsigned i = 1; i < dfs.adjacency_list.size(); i++) {
+  //   std::cout << "[" << i << "]";
+  //   Graph::Edge* curr = dfs.adjacency_list[i];
+  //   while (curr->next != NULL) {
+  //     curr = curr->next;
+  //     std::cout << " -> [" << curr->data.first << ", " << curr->data.second << "]";
+  //   } 
+  //   std::cout << std::endl;
+  // }
   DFS(dfs);
-  std::cout << dfs.adjacency_list.size() << std::endl;
+  // std::cout << dfs.adjacency_list.size() << std::endl;
 
   // Make sure all vertices have been visited
   REQUIRE(one.label == "VISITED");
@@ -222,17 +222,17 @@ TEST_CASE("DFS traversal", "[weight=0][part=3]") {
 
 TEST_CASE("Visual - Draw entire data", "[weight=0][part=3]") {
   Graph g("../data/airports.csv", "../data/routes.csv");
-  std::cout << g.adjacency_list.size() << std::endl;
+  // std::cout << g.adjacency_list.size() << std::endl;
   PNG png;
   PNG* map = &png;
   map->readFromFile("../data/base_map.png");
-  std::cout << map->width() << std::endl;
+  // std::cout << map->width() << std::endl;
 
-  std::cout << "Airport 2030: " << g.adjacency_list[2030]->data.first << ", " << g.adjacency_list[2030]->data.second << std::endl;
+  // std::cout << "Airport 2030: " << g.adjacency_list[2030]->data.first << ", " << g.adjacency_list[2030]->data.second << std::endl;
 
 //   std::pair<PNG, Animation> output;
   PNG output = Visual::visual(g, *map);
-  std::cout << "COMPLETED VISUAL()" << std::endl;
+  // std::cout << "COMPLETED VISUAL()" << std::endl;
   HSLAPixel red;
   red.h = 2;
   red.s = 0.8;
@@ -246,4 +246,5 @@ TEST_CASE("Visual - Draw entire data", "[weight=0][part=3]") {
       }
   }
   output.writeToFile("output.png");
+  //output.second.write("output.gif")
 }
