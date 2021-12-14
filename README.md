@@ -8,7 +8,7 @@
 + Daniel Rugutt - drugutt2@illinois.edu
 + Priya Kumar - priyak5@illinois.edu
 
-## Link to YouTube Video Demo: //Link Here
+## Link to YouTube Video Demo: https://www.danielkrugutt.com/cs225-final-project-video
 ## Link to Slides: https://docs.google.com/presentation/d/1pMQg7txBV6NCWNzhduR7rSIEfacdbqit-1wrGgoWIh8/edit?usp=sharing
 
 ## Summary
