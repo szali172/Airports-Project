@@ -6,7 +6,7 @@
 #include <queue>
 
 /**
- * @brief when user passes in starting airport name
+ * @brief when user passes in starting airport
  * Parses through airports csv file until it finds a matching airport
  * Passed string could be an Airport name or IATA code
  * If no matching string is found, produce an error message
@@ -14,7 +14,7 @@
  * @param start starting airport to search for
  * @return index of starting airport (Airport ID)
  */
-int Graph::locateStart(std::string airports_file, std::string start) {
+int locateStart(std::string airports_file, std::string start) {
     std::ifstream fs(airports_file);    //get airport csv file into the ifstream to be parsed
 
     std::string currLine;
@@ -36,7 +36,7 @@ int Graph::locateStart(std::string airports_file, std::string start) {
 * @param starting node
 * @return SSSP graph
 */
-Graph Graph::dijkstra(std::vector<Edge*> graph, double start) {   //TODO finish up this function and add useful comments
+std::vector<Graph::Edge*> Graph::dijkstra(std::vector<Edge*> graph, double start) {   //TODO finish up this function and add useful comments
     std::cout << "Reached line " << __LINE__ << std::endl;
 // Declaring priority queue, priority queue helper for queue operations, and "infinity" integer
     std::priority_queue<Graph::Edge*, std::vector<Graph::Edge*>, Graph::EdgeComparator> pq;
@@ -63,10 +63,10 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
             continue;
         }
         if (i != start) {
-            Graph::Edge* pushedge = new Graph::Edge(std::make_pair(i, inf), -1);
+            Graph::Edge* pushedge = new Graph::Edge(std::make_pair(i, inf), NULL);
             pq.push(pushedge);
         } else if (i == start && adjacency_list[i] != NULL) {
-            Graph::Edge* pushedge = new Graph::Edge(std::make_pair(i, 0), -1);
+            Graph::Edge* pushedge = new Graph::Edge(std::make_pair(i, 0), NULL);
             pq.push(pushedge);
         }
         std::cout << "Reached line " << __LINE__ << std::endl;
@@ -133,7 +133,7 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
             // check if it has smaller distance to source node than distance from current edge u
             if (u->data.second + v->data.second < v_current_distance) {
               // replacing distance
-              Graph::Edge* smaller_v = new Graph::Edge(std::make_pair(v->data.first, u->data.second + v->data.second), u->data.first);
+              Graph::Edge* smaller_v = new Graph::Edge(std::make_pair(v->data.first, u->data.second + v->data.second), u);
               pq_helper.push(smaller_v);
               pq.pop();
       
@@ -160,42 +160,34 @@ for (unsigned i = 1; i < adjacency_list.size(); i++) {
      Graph::Edge* tmp = shortestpath[u->prev->data.first]->next;
      shortestpath[u->prev->data.first]->next = u;
      u->
-     */
+ */
 
- /*
+ 
  for (unsigned i = 1; i < shortestpath.size(); i++) {
    std::cout << "Index: " << i << std::endl;
-   if (shortestpath[i]->prev_index_ != -1) {
-     //double prev_index = shortestpath[i]->prev->data.first;
+   if (shortestpath[i]->prev != NULL) {
+     if (shortestpath[i]->prev->prev != NULL) {
+       shortestpath[i]->prev->prev = NULL;
+     }
+     double prev_index = shortestpath[i]->prev->data.first;
   
 
-     //std::cout << "Index's prev: " << shortestpath[prev_index]->data.first << std::endl;
+     Graph::Edge* neighbor = shortestpath[i]->next;
+     while (neighbor != NULL) {
+       std::cout << "Current vertex in shortest path: " << i << std::endl;
+       std::cout << i << " -> (" << neighbor->data.first << ", " << neighbor->data.second << std::endl;
+       neighbor = neighbor->next;
+     } 
 
-     //Graph::Edge* tmp = shortestpath[prev_index]->next;
-     //shortestpath[prev_index]->next = shortestpath[i];
-     //shortestpath[prev_index]->next->next = tmp;
-
-    
-   }
- }
-*/
-
- Graph p("airports.csv");
-
- for (unsigned i = 1; i < shortestpath.size(); i++) {
-   if (shortestpath[i]->prev_index != -1) {
-     shortestpath[i]->next = p.adjacency_list[shortestpath[i]->prev_index]->next;
-     p.adjacency_list[shortestpath[i]->prev_index]->next = shortestpath[i];
+     Graph::Edge* tmp = shortestpath[prev_index]->next;
+     shortestpath[prev_index]->next = shortestpath[i];
+     shortestpath[prev_index]->next->next = tmp;
    }
  }
  
- for (unsigned i = 0; i < p.adjacency_list.size(); i++) {
-   std::cout << "Latitude at i = " << i << ": " << p.adjacency_list[i]->data.first << "Longitude at i = " << i << ": " << p.adjacency_list[i]->data.second << std::endl;
- }
- 
 
 
- return p;
+ return shortestpath;
 }
 
 
