@@ -2,23 +2,8 @@
 
 # RESULTS File (ai10-sali200-drugutt2-priyak5)
 
-## DFS
+## Link to YouTube Video Demo: https://www.danielkrugutt.com/cs225-final-project-video
 
-Write results here
+## Picture Results of Program (Combination of DFS, Dijkstra's Algorithm, & Graphic Output of A Graph)
 
-
-## Dijkstra's Algorithm
-
-Write results here
-
-## Graphic Output of A Graph
-
-Write results here
-
-## Observations
-
-Write observations here
-
-## Final Thoughts
-
-Write final thoughts here
+![output](https://media.github-dev.cs.illinois.edu/user/10706/files/6e0217b8-71f3-4a03-956b-0e614014fb5c)
