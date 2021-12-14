@@ -51,6 +51,7 @@ void Graph::airportParse(std::string airports_file) {
     int index = 1;
 
     while (std::getline(data, line)) {
+        std::cout << "entered airport parse" << std::endl;
         std::stringstream lineStream(line);
         std::string aCell;
         int csvCol = 0;
@@ -103,7 +104,7 @@ void Graph::airportParse(std::string airports_file) {
 * @param routes_file CSV file containing all the possible routes between 2 different airports
 */
 void Graph::routeParse(std::string routes_file) {
-    // std::cout << "entered route parse" << std::endl;
+    //std::cout << "entered route parse" << std::endl;
     std::ifstream data(routes_file);    //get routes csv file into the ifstream to be parsed
     std::string line;
 
@@ -117,6 +118,7 @@ void Graph::routeParse(std::string routes_file) {
     int index = 1;
 
     while (std::getline(data, line)) {  //goes through every comma within every line in the csv file
+    std::cout << "entered route parse" << std::endl;
         std::stringstream lineStream(line);
         std::string aCell;
         int csvCol = 0;

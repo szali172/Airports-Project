@@ -36,7 +36,7 @@ int Graph::locateStart(std::string airports_file, std::string start) {
 * @param starting node
 * @return SSSP graph
 */
-std::vector<Graph::Edge*> Graph::dijkstra(std::vector<Edge*> graph, double start) {   //TODO finish up this function and add useful comments
+Graph Graph::dijkstra(std::vector<Edge*> graph, double start) {   //TODO finish up this function and add useful comments
 // Declaring priority queue, priority queue helper for queue operations, and "infinity" integer
     std::priority_queue<Graph::Edge*, std::vector<Graph::Edge*>, Graph::EdgeComparator> pq;
     std::priority_queue<Graph::Edge*, std::vector<Graph::Edge*>, Graph::EdgeComparator> pq_helper;
@@ -65,9 +65,6 @@ std::vector<Graph::Edge*> Graph::dijkstra(std::vector<Edge*> graph, double start
    shortestpath.push_back(NULL);
  }
  
-
-
-
  for (unsigned i = 1; i < adjacency_list.size(); i++) {
 
    // Removing minimum element from priority queue
@@ -145,7 +142,10 @@ std::vector<Graph::Edge*> Graph::dijkstra(std::vector<Edge*> graph, double start
   }
  }
 
- return shortestpath;
+ // Using Graph constructor that sets adjacency list
+ Graph shortestpathgraph(shortestpath);
+
+ return shortestpathgraph;
 }
 
 

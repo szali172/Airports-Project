@@ -5,6 +5,7 @@
 # Authors
 + Zuhair Ali - sali200@illinois.edu
 + Lexi Ippolito - ai10@illinois.edu
+
 + Daniel Rugutt - drugutt2@illinois.edu
 + Priya Kumar - priyak5@illinois.edu
 
@@ -70,7 +71,8 @@ $ make
 Once it successfully compiles, you can then run the program and generate the visualizations with the command below:
 
 ```
-$ src/main [Airport Data Location] [Route Data Location] [Source Airport] [Destination Airport] [Image Location]
+$ src/main
+/* This automatically grabs all the files listed below, and will output a completed picture called "dijkstra_picture.png in the main file structure */
 ```
 + `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at "data/airports.csv"
 + `Route Data Location` : The file location of the routes dataset. The data can be found at "data/routes.csv
@@ -83,9 +85,9 @@ After running the commnd above, you may see in the console if any inputs were in
 
 ## Project Demo
 
-THIS IS THE PROJET DEMO - TODO FINISH THIS
+This is the result of running the main makefile:
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+![output](https://media.github-dev.cs.illinois.edu/user/10706/files/2e03f1ac-d956-4ba3-8449-1b9706770558)
   
 ## Instructions on how to build and run the test suites
 
@@ -94,13 +96,8 @@ The way to run the test cases are very similar to how to build and run the main 
 To run the test cases for the final_project, you need to first build the executable and ensure that the code compiles properly. There are three separate test cases you can test for each main component of the program, running the Dijkstra's algorithm, testing the parsing methods of the CSV file for the correct implementation of the adjacency lists (DFS algorithm), and testing out the PNG output of the graph traversal. Here are the three separate commands you can run to test each component:
 
 ```
-$ make test-dijstra
-```
-```
-$ make test-parse
-```
-```
-$ make test-print
+$ make ./test
+/* This runs all 3 tests, dijkstra's, parsing, and print/visual tests */
 ```
 
 Once it successfully compiles, you can then run the program and generate the visualizations with the command below:
@@ -118,9 +115,7 @@ After running the commnd above, you may see in the console if any inputs were in
 
 ### Instructions/Examples of reproducing the tests (Test Demo)
 
-TODO FINISH THIS
-
-Etiam in posuere elit. Vivamus porta luctus orci, ac dictum ex vestibulum id. Nam ac tempor nunc. Fusce condimentum, magna et ornare ultricies, sapien augue cursus nibh, non vehicula eros ligula a odio. Nam justo ex, facilisis nec efficitur vel, aliquet in dolor. Morbi sagittis nibh nec metus iaculis, nec sodales sem dignissim. Nulla lobortis, quam sit amet molestie laoreet, felis leo pellentesque mauris, vel posuere augue ligula id elit. Quisque fermentum sit amet sapien aliquam pretium. Duis augue nulla, rutrum a maximus nec, euismod gravida purus. Maecenas sodales mi et ligula iaculis accumsan. Ut auctor commodo lorem, ac finibus augue feugiat ut. Sed et urna suscipit, molestie justo eget, lacinia elit. Nunc vel leo pellentesque, dapibus dolor id, consectetur lorem. Nam eleifend cursus velit, at mollis leo rutrum vitae.
+This is the result of running the test cases makefile:
 
 
 ## Acknowledgements
