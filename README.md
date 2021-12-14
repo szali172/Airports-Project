@@ -72,7 +72,7 @@ Once it successfully compiles, you can then run the program and generate the vis
 
 ```
 $ src/main
-/* This automatically grabs all the files listed below */
+/* This automatically grabs all the files listed below, and will output a completed picture called "dijkstra_picture.png in the main file structure */
 ```
 + `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at "data/airports.csv"
 + `Route Data Location` : The file location of the routes dataset. The data can be found at "data/routes.csv
