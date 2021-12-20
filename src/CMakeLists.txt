@@ -16,12 +16,12 @@ file(GLOB TEST_SOURCES "tests/*.cpp")
 add_library(MainLib ${SOURCES} ${INCLUDES} main.cpp)
 
 # Link
-target_include_directories(MainLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}) # append "../everything/include"
+target_include_directories(MainLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} "../parse-dijkstra" "../visual-dfs") # append "../everything/include"
 
 # Link Parsing Library to the a-star one
-# link_directories("../parsing")
-# link_directories("../everything")
-# target_link_libraries(MainLib ParsingLib) # append EverythingLib
+link_directories("../parse-dijkstra")
+link_directories("../visual-dfs")
+target_link_libraries(MainLib Parse-DijkstraLib Visual-DFSLib) # append EverythingLib
 
 # Add the executable
 add_executable(main main.cpp)

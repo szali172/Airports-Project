@@ -122,6 +122,8 @@ namespace cs225 {
   const HSLAPixel & PNG::getPixel(unsigned int x, unsigned int y) const { return _getPixelHelper(x,y); }
 
   bool PNG::readFromFile(string const & fileName) {
+    
+
     vector<unsigned char> byteData;
     unsigned error = lodepng::decode(byteData, width_, height_, fileName);
 

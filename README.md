@@ -5,10 +5,12 @@
 # Authors
 + Zuhair Ali - sali200@illinois.edu
 + Lexi Ippolito - ai10@illinois.edu
+
 + Daniel Rugutt - drugutt2@illinois.edu
 + Priya Kumar - priyak5@illinois.edu
 
-## Link to YouTube Video Demo: //Link Here
+## Link to YouTube Video Demo: https://www.danielkrugutt.com/cs225-final-project-video
+## Link to Slides: https://docs.google.com/presentation/d/1pMQg7txBV6NCWNzhduR7rSIEfacdbqit-1wrGgoWIh8/edit?usp=sharing
 
 ## Summary
 
@@ -26,15 +28,15 @@ The main two problems faced when working with the OpenFlights data with the list
 
 ## The linkage location of all major code, data, and results
 
-TODO FINISH THIS
+The main source code is located within the *__parse-dijkstra__* and *__visual-dfs__* folders. 
 
-Mauris vel turpis gravida, varius purus quis, pellentesque odio. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed tristique, neque dictum dignissim sodales, lectus metus tempor mauris, sed auctor mi leo varius sem. Etiam ut scelerisque neque, ut convallis ex. Aenean tellus dui, ultricies non ipsum ut, fringilla rutrum felis. Ut id volutpat dolor, imperdiet lobortis sem. Vivamus id turpis mollis nibh porta consectetur. Pellentesque nec enim vitae leo dignissim imperdiet at in dui. Donec dapibus maximus justo. Mauris consequat rhoncus nunc et malesuada. Pellentesque feugiat sapien commodo molestie varius. Sed nec arcu eget eros sollicitudin bibendum id vitae ligula.
+The *__parse-dijkstra__* folder contains the main Dijkstra graph algorithm, specifically within the *src* folder with the graph-parse.cpp and graph.cpp which has the implementations, the definitions of each method are located within the *include* folder, and the test cases are located within the *tests* folder.
 
-### Definitions of the input and output location for each method:
+The *__visual-dfs__* folder contains the main DFS search and the PNG algorithms used to properly visualize the OpenFlights dataset and the distance between any two airports within the world. Like the *__parse-dijkstra__* folder, the main implementations of the PNG, HSLAPixel, and visual classes when visualizing the parsed data is located within the *src* folder, the definitions of each method are located within the *include* folder, and the test cases are located within the *tests* folder.
 
-TODO FINISH THIS
+The *__data__* folder contains the main dataset the project uses, specifically *airports.csv*, *routes.csv*, and *base_map.png*. This folder also contains the *change_airport_id.py* file used to clean the dataset (it is not used in the compilation or execution of the final project).
 
-Etiam dignissim scelerisque sapien, faucibus lacinia felis gravida id. Nunc porta venenatis massa, quis ullamcorper nisi venenatis non. Maecenas mattis rhoncus ex, non tempor nunc tempus vel. Praesent quis diam et diam venenatis hendrerit at ac neque. Curabitur odio quam, fermentum quis fermentum et, auctor vel arcu. Proin sollicitudin placerat neque, id iaculis lorem scelerisque ut. Fusce fringilla eu mauris eget vehicula. Proin pellentesque, metus sit amet malesuada lacinia, massa tortor rhoncus ipsum, ac rutrum arcu risus ac mi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer et faucibus urna. Suspendisse gravida ante nisi, volutpat ultrices lorem egestas eu. Quisque sit amet neque vitae dui accumsan lacinia ut sed dolor. Nunc aliquet sit amet dui at porta.
+Every .h file within the *include* folder in both the *__parse-dijkstra__* and the *__visual-dfs__* folders contain .h header files which contains detailed descriptions of each method/function, constructor, and variables used, which can also be taken to create a Doxygen on your own machine given the right installation setup (steps not shown in this README).
 
 
 ## Getting Started
@@ -50,7 +52,7 @@ We reccommend you run this project on the University EWS system such as through 
 Once everything is set up, you can clone the repository by running the following command in your perferred enditor/terminal workspace
 
 ```
-git clone https://github-dev.cs.illinois.edu/cs225-fa21/ai10-sali200-drugutt2-priyak5.git
+$ git clone https://github-dev.cs.illinois.edu/cs225-fa21/ai10-sali200-drugutt2-priyak5.git
 ```
 
 
@@ -59,32 +61,33 @@ git clone https://github-dev.cs.illinois.edu/cs225-fa21/ai10-sali200-drugutt2-pr
 First, you will need to build all the dependencies and the Makefile.
 
 ```
-cmake3 .
+$ cmake3 .
 ```
 Followed by
 ```
-make
+$ make
 ```
 
 Once it successfully compiles, you can then run the program and generate the visualizations with the command below:
 
 ```
-src/main [Airport Data Location] [Route Data Location] [Source Airport] [Destination Airport] [Image Location]
+$ src/main
+/* This automatically grabs all the files listed below, and will output a completed picture called "dijkstra_picture.png in the main file structure */
 ```
-+ `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at data/airports.csv
-+ `Route Data Location` : The file location of the routes dataset. The data can be found at data/routes.csv
-+ `Source Airport` : The OpenFlights unique identified for the starting airport
-+ `Destination Airport` : The OpenFlights unique identified for the ending airport
-+ `Image Location` : The desired output location for the PNG file (must end in .png)
++ `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at "data/airports.csv"
++ `Route Data Location` : The file location of the routes dataset. The data can be found at "data/routes.csv
++" `Source Airport` : The OpenFlights unique identified for the starting airport, i.e. "ORD"
++ `Destination Airport` : The OpenFlights unique identified for the ending airport, i.e. "NBO"
++ `Image Location` : The desired output location for the PNG file (must end in .png), i.e. "data/base_map.png"
 
 After running the commnd above, you may see in the console if any inputs were invalid, or if the arguments were successfully inputed, the correct output of the program
 
 
 ## Project Demo
 
-THIS IS THE PROJET DEMO - TODO FINISH THIS
+This is the result of running the main makefile:
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+![output](https://media.github-dev.cs.illinois.edu/user/10706/files/2e03f1ac-d956-4ba3-8449-1b9706770558)
   
 ## Instructions on how to build and run the test suites
 
@@ -93,19 +96,14 @@ The way to run the test cases are very similar to how to build and run the main 
 To run the test cases for the final_project, you need to first build the executable and ensure that the code compiles properly. There are three separate test cases you can test for each main component of the program, running the Dijkstra's algorithm, testing the parsing methods of the CSV file for the correct implementation of the adjacency lists (DFS algorithm), and testing out the PNG output of the graph traversal. Here are the three separate commands you can run to test each component:
 
 ```
-make test-dijstra
-```
-```
-make test-parse
-```
-```
-make test-print
+$ make ./test
+/* This runs all 3 tests, dijkstra's, parsing, and print/visual tests */
 ```
 
 Once it successfully compiles, you can then run the program and generate the visualizations with the command below:
 
 ```
-./[specific test executable ran, i.e. "test-dijstra"] [Airport Data Location] [Route Data Location] [Source Airport] [Destination Airport] [Image Location]
+$ ./[specific test executable ran, i.e. "test-dijstra"] [Airport Data Location] [Route Data Location] [Source Airport] [Destination Airport] [Image Location]
 ```
 + `Airport Data Location` : The file location of the airports dataset. The data set is found in the main project folder at data/airports.csv
 + `Route Data Location` : The file location of the routes dataset. The data can be found at data/routes.csv
@@ -117,9 +115,7 @@ After running the commnd above, you may see in the console if any inputs were in
 
 ### Instructions/Examples of reproducing the tests (Test Demo)
 
-TODO FINISH THIS
-
-Etiam in posuere elit. Vivamus porta luctus orci, ac dictum ex vestibulum id. Nam ac tempor nunc. Fusce condimentum, magna et ornare ultricies, sapien augue cursus nibh, non vehicula eros ligula a odio. Nam justo ex, facilisis nec efficitur vel, aliquet in dolor. Morbi sagittis nibh nec metus iaculis, nec sodales sem dignissim. Nulla lobortis, quam sit amet molestie laoreet, felis leo pellentesque mauris, vel posuere augue ligula id elit. Quisque fermentum sit amet sapien aliquam pretium. Duis augue nulla, rutrum a maximus nec, euismod gravida purus. Maecenas sodales mi et ligula iaculis accumsan. Ut auctor commodo lorem, ac finibus augue feugiat ut. Sed et urna suscipit, molestie justo eget, lacinia elit. Nunc vel leo pellentesque, dapibus dolor id, consectetur lorem. Nam eleifend cursus velit, at mollis leo rutrum vitae.
+This is the result of running the test cases makefile:
 
 
 ## Acknowledgements
