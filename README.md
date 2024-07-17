@@ -1,3 +1,5 @@
+*This project was completed as part of the CS 225 course at University of Illinois Urbana-Champaign as our group's final project. I worked as the Senior Developer of the project, coding a large portion of the codebase, setting up the structure, writing the make file, splitting up and delegating tasks, and overseeing the production.*
+
 # CS 225 Data Structures
 
 # README File (ai10-sali200-drugutt2-priyak5)
@@ -49,7 +51,7 @@ We reccommend you run this project on the University EWS system such as through 
 Once everything is set up, you can clone the repository by running the following command in your perferred enditor/terminal workspace
 
 ```
-$ git clone https://github-dev.cs.illinois.edu/cs225-fa21/ai10-sali200-drugutt2-priyak5.git
+$ git clone https://github.com/szali172/Airports-Project.git
 ```
 
 
@@ -84,7 +86,7 @@ After running the commnd above, you may see in the console if any inputs were in
 
 This is the result of running the main makefile:
 
-![output](https://media.github-dev.cs.illinois.edu/user/10706/files/2e03f1ac-d956-4ba3-8449-1b9706770558)
+![output](https://github.com/szali172/Airports-Project/blob/Zuhair/output.png)
   
 ## Instructions on how to build and run the test suites
 
