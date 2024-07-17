@@ -111,10 +111,6 @@ $ ./[specific test executable ran, i.e. "test-dijstra"] [Airport Data Location] 
 
 After running the commnd above, you may see in the console if any inputs were invalid, or if the arguments were successfully inputed, the correct output of the program. You will also be able to see the Catch2 results of the test cases that are provided.
 
-### Instructions/Examples of reproducing the tests (Test Demo)
-
-This is the result of running the test cases makefile:
-
 
 ## Acknowledgements
 + This project was created as a final project for [CS 225](https://courses.engr.illinois.edu/cs225/fa2021/pages/final_project.html)
