@@ -1,4 +1,5 @@
-*This project was completed as part of the CS 225 course at University of Illinois Urbana-Champaign as our group's final project. I worked as the Senior Developer of the project, coding a large portion of the codebase, setting up the structure, writing the make file, splitting up and delegating tasks, and overseeing the production.*
+*This project was completed as part of the CS 225 course at University of Illinois Urbana-Champaign as our group's final project. I worked as the Lead Developer of the project, coding a large portion of the codebase, setting up the structure, writing the make file, splitting up and delegating tasks, and overseeing the production.*
+*- Zuhair*
 # CS 225 Data Structures
 
 # README File (ai10-sali200-drugutt2-priyak5)
